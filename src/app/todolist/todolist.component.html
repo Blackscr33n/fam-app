@@ -1,0 +1,6 @@
+<ul>
+    <li *ngFor="let todo of todos">
+        
+        <mat-checkbox class="example-margin" [(ngModel)]="todo.isDone">{{todo.title}} - {{todo.dueDate}}</mat-checkbox>
+    </li>
+</ul>
