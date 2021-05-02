@@ -1,6 +1,11 @@
+<div class="container">
+<h1>ToDo-List</h1>
 <ul>
     <li *ngFor="let todo of todos">
-        
         <mat-checkbox class="example-margin" [(ngModel)]="todo.isDone">{{todo.title}} - {{todo.dueDate}}</mat-checkbox>
     </li>
 </ul>
+</div>
+<button mat-fab color="primary" [routerLink]="'/add-todo'" class="add-todo-btn" aria-label="icon button with a add icon">
+    <mat-icon>add</mat-icon>
+</button>
