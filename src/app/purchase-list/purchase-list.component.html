@@ -3,15 +3,13 @@
   <h1>Purchases</h1>
 
   <mat-form-field appearance="fill">
-    <mat-label>Monat</mat-label>
-    <mat-select [(value)]="selectedMonth" (selectionChange)="onUpdateMonth()">
-      <mat-option *ngFor="let month of months" [value]="month.value">
-        {{month.name}}
-      </mat-option>
-    </mat-select>
+    <mat-label>Month</mat-label>
+    <input matInput [(ngModel)]="selectedDate" [matDatepicker]="picker" (dateChange)="onUpdateMonth()">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker></mat-datepicker>
   </mat-form-field>
 
-  <table mat-table [dataSource]="purchases">
+  <table mat-table [dataSource]="purchases" *ngIf="purchases.length != 0">
 
     <!-- Position Column -->
   <ng-container matColumnDef="title">
@@ -40,6 +38,12 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <div *ngIf="purchases.length == 0">
+    <span>No purchases available</span>
+  </div>
+  <mat-divider></mat-divider>
+  <app-purchase-summary [selectedDate]="selectedDate"></app-purchase-summary>
 </div>
 <button mat-fab color="primary" [routerLink]="'/add-purchase'" class="add-purchase-btn"
   aria-label="icon button with a add icon">

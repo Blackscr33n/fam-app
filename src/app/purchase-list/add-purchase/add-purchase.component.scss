@@ -1,7 +1,11 @@
 .purchase-container {
-    margin: 2.5% 0 0 2.5%;
+    margin: 2.5vh 2.5vh 2.5vh 2.5vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: stretch;
+}
+
+.save-btn{
+    float: right;
 }

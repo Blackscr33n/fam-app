@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface Purchase {
     id: number;
     title: String;

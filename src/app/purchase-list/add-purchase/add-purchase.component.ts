@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Purchase } from '../purchase';
-import { PurchaseService } from '../_services/purchase.service';
+import { Purchase } from '../../_models/purchase';
+import { PurchaseService } from '../../_services/purchase.service';
 import { Router } from '@angular/router';
 
 @Component({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PurchaseService } from '../_services/purchase.service';
-import { Purchase } from '../purchase';
+import { Purchase } from '../_models/purchase';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-purchase-list',
@@ -11,33 +12,17 @@ export class PurchaseListComponent implements OnInit {
   displayedColumns: string[] = ['title', 'amount', 'date', 'purchaser'];
   purchases: Purchase[] = [];
 
-  selectedMonth: Number = 0;
-  months: any[] = [ 
-    {name:'Jänner', value: 0},
-    {name:'Februar', value: 1},
-    {name:'März', value: 2},
-    {name:'April', value: 3},
-    {name:'Mai', value: 4},
-    {name:'Juni', value: 5},
-    {name:'Juli', value: 6},
-    {name:'August', value: 7},
-    {name:'September', value: 8},
-    {name:'Oktober', value: 9},
-    {name:'November', value: 10},
-    {name:'Dezember', value: 11},
-  ];
+  selectedDate: moment.Moment = moment();
 
   constructor(private purchaseService: PurchaseService) { }
 
   ngOnInit(): void {
-    this.purchases = this.purchaseService.getPurchases();
-    
+    this.purchases = this.purchaseService.getPurchasesByMonth(this.selectedDate);
   }
 
-  onUpdateMonth() {
-    this.purchaseService.sortPurchasesByMonth();
+  onUpdateMonth(): void {
     
-    this.purchases = this.purchaseService.getPurchasesByMonth(this.selectedMonth);
+    this.purchases = this.purchaseService.getPurchasesByMonth(this.selectedDate);
   }
 
 }

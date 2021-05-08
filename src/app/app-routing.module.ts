@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TodolistComponent } from './todolist/todolist.component';
-import { AddTodoComponent } from './add-todo/add-todo.component';
+import { AddTodoComponent } from './todolist/add-todo/add-todo.component';
 import { PurchaseListComponent } from './purchase-list/purchase-list.component';
-import { AddPurchaseComponent } from './add-purchase/add-purchase.component';
+import { AddPurchaseComponent } from './purchase-list/add-purchase/add-purchase.component';
 
 const routes: Routes = [
   { path: 'todos', component: TodolistComponent},

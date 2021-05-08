@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Todo } from '../todo';
+import { Todo } from '../_models/todo';
 import * as moment from 'moment';
 
 @Injectable({

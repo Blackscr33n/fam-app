@@ -2,7 +2,7 @@
 <h1>ToDo-List</h1>
 <ul>
     <li *ngFor="let todo of todos">
-        <mat-checkbox class="example-margin" [(ngModel)]="todo.isDone">{{todo.title}} - {{todo.dueDate}}</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="todo.isDone">{{todo.title}} - {{todo.dueDate | date: 'mediumDate'}}</mat-checkbox>
     </li>
 </ul>
 </div>
