@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Material Design Modules
@@ -17,6 +18,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
@@ -30,6 +32,9 @@ import { PurchaseListComponent } from './purchase-list/purchase-list.component';
 import { AddPurchaseComponent } from './purchase-list/add-purchase/add-purchase.component';
 import { PurchaseSummaryComponent } from './purchase-list/purchase-summary/purchase-summary.component';
 import { AlertComponent } from './_components/alert/alert.component';
+import { FamilyComponent } from './family/family.component';
+import { MembersComponent } from './family/members/members.component';
+import { FamilyService } from './_services/family.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,8 @@ import { AlertComponent } from './_components/alert/alert.component';
     AddPurchaseComponent,
     PurchaseSummaryComponent,
     AlertComponent,
+    FamilyComponent,
+    MembersComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,11 +65,14 @@ import { AlertComponent } from './_components/alert/alert.component';
     MatTableModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    FamilyService,
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]
