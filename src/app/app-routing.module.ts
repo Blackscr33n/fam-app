@@ -4,12 +4,15 @@ import { TodolistComponent } from './todolist/todolist.component';
 import { AddTodoComponent } from './todolist/add-todo/add-todo.component';
 import { PurchaseListComponent } from './purchase-list/purchase-list.component';
 import { AddPurchaseComponent } from './purchase-list/add-purchase/add-purchase.component';
+import { AuthGuard } from './_helpers/auth.guard';
+const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
 const routes: Routes = [
-  { path: 'todos', component: TodolistComponent},
-  { path: 'add-todo', component: AddTodoComponent},
-  { path: 'add-purchase', component: AddPurchaseComponent},
-  { path: 'purchase-list', component: PurchaseListComponent},
+  { path: 'account', loadChildren: accountModule },
+  { path: 'todos', component: TodolistComponent, canActivate: [AuthGuard]},
+  { path: 'add-todo', component: AddTodoComponent, canActivate: [AuthGuard]},
+  { path: 'add-purchase', component: AddPurchaseComponent, canActivate: [AuthGuard]},
+  { path: 'purchase-list', component: PurchaseListComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/todos', pathMatch: 'full' },
 ];
 

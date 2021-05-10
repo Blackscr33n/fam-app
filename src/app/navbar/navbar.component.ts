@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ export class NavbarComponent implements OnInit {
 
   opened: boolean = false;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +21,10 @@ export class NavbarComponent implements OnInit {
 
   closeNav(): void {
     this.opened = false;
+  }
+
+  logout() {
+    this.accountService.logout();
   }
 
 }
