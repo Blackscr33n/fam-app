@@ -35,6 +35,7 @@ import { AlertComponent } from './_components/alert/alert.component';
 import { FamilyComponent } from './family/family.component';
 import { MembersComponent } from './family/members/members.component';
 import { FamilyService } from './_services/family.service';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { FamilyService } from './_services/family.service';
     MatDatepickerModule,
     MatMomentDateModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GraphQLModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
