@@ -21,7 +21,6 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { fakeBackendProvider } from './_helpers/fake-backend.interceptor';
 
 import { AppComponent } from './app.component';
@@ -72,7 +71,6 @@ import { GraphQLModule } from './graphql.module';
     GraphQLModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     FamilyService,
     fakeBackendProvider

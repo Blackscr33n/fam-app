@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
 
-    onSubmit() {
+    async onSubmit() {
         this.submitted = true;
 
         // reset alerts on submit
@@ -48,19 +48,16 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.login(this.f.username.value, this.f.password.value)
-            .pipe(first())
-            .subscribe(
-                data => {
-                  console.log(data);
-                  
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    console.log(error);
-                    
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
+        var user = await this.accountService.login(this.f.username.value, this.f.password.value).catch((err) => {
+            this.alertService.error(err);
+            console.error(err);
+            this.submitted = false;
+            this.loading = false;
+        })
+        
+        if(user) {
+            this.router.navigate([this.returnUrl]);
+        }
     }
+    
 }

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Apollo, gql } from 'apollo-angular';
 
 import { environment } from '../../environments/environment';
 import { User } from '../_models';
+import { ApolloQueryResult } from '@apollo/client/core';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -14,69 +15,104 @@ export class AccountService {
 
     constructor(
         private router: Router,
-        private http: HttpClient
+        private http: HttpClient,
+        private apollo: Apollo
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
-        this.user = this.userSubject.asObservable();
+        this.initUser();
     }
 
     public get userValue(): User {
         return this.userSubject.value;
     }
 
-    login(username, password) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
-            }));
+
+    async login(username, password) {
+        const login_cred = gql`
+            mutation login
+            {
+                login(
+                    email: "${username}",
+                    password: "${password}"
+                    )
+            }
+        `;
+        
+        var res = await this.apollo.mutate({
+            mutation: login_cred
+        }).toPromise();
+        
+        localStorage.setItem('token', res.data['login']);
+        const userRes = await this.getByUsername();
+        localStorage.setItem('user', JSON.stringify(userRes.data.user));
+        this.initUser();
+
+
+        return this.userValue;
+    }
+
+    initUser() {
+        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.user = this.userSubject.asObservable();
     }
 
     logout() {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
         this.userSubject.next(null);
         this.router.navigate(['/account/login']);
     }
 
-    register(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+    async register(user: User) {
+        console.log(user);
+        var firstname = user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
+        var lastname = user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
+        const register_mut = gql`
+        mutation register {
+            register (
+                firstname: "${firstname}"
+                lastname: "${lastname}"
+                email: "${user.username}"
+                password: "${user.password}"
+            )
+            {email,firstname,lastname}
+        }
+        `;
+
+        var res = await this.apollo.mutate({
+            mutation: register_mut
+        }).toPromise();
+
+        if(res.errors) {
+            throw new Error(res.errors[0].message)
+        }
+
+        return res.data['register'];
     }
 
     getAll() {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-    getById(id: string) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+    private GET_USER = gql`
+        query user {
+            user {
+                email
+                firstname
+                lastname
+            }
+        }
+    `;
+
+    getByUsername(): Promise<any> {
+        return this.apollo.watchQuery<any>({
+            query: this.GET_USER,
+            context: {
+                // example of setting the headers with context per operation
+                headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+            },
+        }).result()
     }
 
-    update(id, params) {
-        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
-            .pipe(map(x => {
-                // update stored user if the logged in user updated their own record
-                if (id == this.userValue.id) {
-                    // update local storage
-                    const user = { ...this.userValue, ...params };
-                    localStorage.setItem('user', JSON.stringify(user));
 
-                    // publish updated user to subscribers
-                    this.userSubject.next(user);
-                }
-                return x;
-            }));
-    }
-
-    delete(id: string) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`)
-            .pipe(map(x => {
-                // auto logout if the logged in user deleted their own record
-                if (id == this.userValue.id) {
-                    this.logout();
-                }
-                return x;
-            }));
-    }
 }
