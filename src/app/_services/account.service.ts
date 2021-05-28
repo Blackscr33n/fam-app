@@ -6,7 +6,7 @@ import { Apollo, gql } from 'apollo-angular';
 
 import { environment } from '../../environments/environment';
 import { User } from '../_models';
-import { ApolloQueryResult } from '@apollo/client/core';
+
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -45,7 +45,6 @@ export class AccountService {
         const userRes = await this.getByUsername();
         localStorage.setItem('user', JSON.stringify(userRes.data.user));
         this.initUser();
-
 
         return this.userValue;
     }

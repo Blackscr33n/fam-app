@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { AccountService } from '../../_services/account.service';
 import { AlertService } from '../../_services/alert.service';
+import { FamilyService } from 'src/app/_services/family.service';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private familyService: FamilyService
     ) { }
 
     ngOnInit() {
@@ -56,6 +58,7 @@ export class LoginComponent implements OnInit {
         })
         
         if(user) {
+            this.familyService.loadFamily();
             this.router.navigate([this.returnUrl]);
         }
     }

@@ -1,7 +1,5 @@
 <div class="row">
-    <ul>
-        <li *ngFor="let user of familyMembers">
-            {{user.username}}
-        </li>
-    </ul>
+    <mat-list>
+        <mat-list-item *ngFor="let user of familyMembers"> {{user.firstname }} {{ user.lastname }} </mat-list-item>
+       </mat-list>
 </div>
