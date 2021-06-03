@@ -16,13 +16,16 @@ export class PurchaseListComponent implements OnInit {
 
   constructor(private purchaseService: PurchaseService) { }
 
-  ngOnInit(): void {
-    this.purchases = this.purchaseService.getPurchasesByMonth(this.selectedDate);
+  async ngOnInit() {
+    //this.purchaseService.getPurchases();
+    this.purchases = await this.purchaseService.getPurchasesByMonth(this.selectedDate);
+    console.log(this.purchases);
+    
   }
 
-  onUpdateMonth(): void {
+  async onUpdateMonth() {
     
-    this.purchases = this.purchaseService.getPurchasesByMonth(this.selectedDate);
+    this.purchases = await this.purchaseService.getPurchasesByMonth(this.selectedDate);
   }
 
 }

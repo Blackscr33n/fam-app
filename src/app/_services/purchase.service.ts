@@ -1,21 +1,33 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Purchase } from '../_models/purchase';
+import { Apollo, gql } from 'apollo-angular';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PurchaseService {
 
-  constructor() { }
+  constructor(private apollo: Apollo) { }
 
   currentId = 1;
 
-  purchasesByMonth: any[] = [
-    { year: moment().year(), month: moment().month(), purchases: [{id:0 , title: 'Hofer Einkauf', purchaser: 'Bernhard', purchaseDate: moment().month(2).toDate(), amount: 20.50 }]}
-  ];
+  purchasesByMonth: any[] = [];
 
   addPurchase(purchase: Purchase) {
+    const addPurchaseMutation = gql`
+      mutation addPurchase {
+        addPurchase(
+          title: "${purchase.title}"
+          amount: ${purchase.amount}
+          purchaseDate: ${purchase.purchaseDate}
+          purchaser: ${purchase.purchaser}
+        )
+        {id, amount, title, purchaseDate, purchaser {email}, family, {name}
+      }
+    
+    `
     const foundMonth = this.purchasesByMonth.find( month => month.month == purchase.purchaseDate.getMonth() && month.year == purchase.purchaseDate.getFullYear());
       if(foundMonth) {
         
@@ -31,19 +43,34 @@ export class PurchaseService {
     this.currentId ++;
   }
 
-  getPurchases(): Purchase[] {
-    return this.purchasesByMonth;
+  getPurchases(): any {
   }
 
-  getPurchasesByMonth(selectedDate: moment.Moment): Purchase[] {
+  async getPurchasesByMonth(selectedDate: moment.Moment): Promise<Purchase[]> {
+    const dateString = selectedDate.format("YYYY-MM");
+    const purchaseByMonthQuery = gql`
+      query purchasesByMonth {
+        purchasesByMonth(purchaseMonth: "${dateString}") {
+          title
+          amount
+          purchaser {
+            firstname
+            lastname
+          }
+        }
+      }
+    `
+    const res = await this.apollo.watchQuery<any>({
+            query: purchaseByMonthQuery,
+            context: {
+                headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+            },
+        }).result();
+    this.purchasesByMonth = res.data['purchasesByMonth'];
     
-    const foundMonth = this.purchasesByMonth.find( purchases => purchases.month == selectedDate.month() && purchases.year == selectedDate.year());
+    console.log('resData: ', res.data);
 
-    if(foundMonth == undefined) {
-      return [];
-    }
-    
-    return foundMonth.purchases; 
+    return await res.data['purchasesByMonth'] as Purchase[]; 
   }
 
   getNewPurchase(): Purchase {

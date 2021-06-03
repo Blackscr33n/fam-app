@@ -10,7 +10,6 @@ import { PurchaseService } from 'src/app/_services/purchase.service';
 export class PurchaseSummaryComponent implements OnInit, OnChanges {
   @Input() selectedDate: moment.Moment = moment();
   summary: any = 0.00;
-  
 
   constructor(private purchaseService: PurchaseService) { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -29,9 +28,5 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.summary = this.purchaseService.getSummaryOfPurchasesByMonth(this.selectedDate);
     console.log(this.summary);
-    
   }
-
-   
-
 }
