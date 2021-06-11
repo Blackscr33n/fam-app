@@ -47,6 +47,7 @@ export class FamilyComponent implements OnInit {
 
   addToFamily() {
     this.familyService.addFamilyMember(this.userControl.value);
+    
   }
 
 }

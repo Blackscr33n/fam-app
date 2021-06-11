@@ -22,6 +22,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { fakeBackendProvider } from './_helpers/fake-backend.interceptor';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 import { AppComponent } from './app.component';
 import { TodolistComponent } from './todolist/todolist.component';
@@ -72,6 +73,7 @@ import { GraphQLModule } from './graphql.module';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     FamilyService,
     fakeBackendProvider
   ],

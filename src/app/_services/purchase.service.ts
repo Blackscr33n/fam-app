@@ -11,36 +11,33 @@ export class PurchaseService {
 
   constructor(private apollo: Apollo) { }
 
-  currentId = 1;
-
   purchasesByMonth: any[] = [];
 
-  addPurchase(purchase: Purchase) {
+  async addPurchase(purchase: Purchase) {
+    console.log(purchase);
+    
     const addPurchaseMutation = gql`
       mutation addPurchase {
         addPurchase(
           title: "${purchase.title}"
           amount: ${purchase.amount}
-          purchaseDate: ${purchase.purchaseDate}
-          purchaser: ${purchase.purchaser}
+          purchaseDate: "${moment(purchase.purchaseDate).format('YYYY-MM-DD')}"
+          purchaseMonth: "${moment(purchase.purchaseDate).format('YYYY-MM')}"
+          purchaser: "${purchase.purchaser}"
         )
-        {id, amount, title, purchaseDate, purchaser {email}, family, {name}
+        {
+          id, amount, title, purchaseDate, purchaser {
+          email}, family, {name}}
       }
+    `;
+      console.log("mutation: ", addPurchaseMutation);
+    var res = await this.apollo.mutate({
+            mutation: addPurchaseMutation
+        }).toPromise();
+        console.log('addPurchaseRes: ', res);
+        
+        return res.data['purchase'];
     
-    `
-    const foundMonth = this.purchasesByMonth.find( month => month.month == purchase.purchaseDate.getMonth() && month.year == purchase.purchaseDate.getFullYear());
-      if(foundMonth) {
-        
-        const foundPurchase = foundMonth.purchases.find( (purchaseElem: { id: number; }) => purchaseElem.id == purchase.id);
-        
-        if(foundPurchase === undefined) {
-          foundMonth.purchases.push(purchase);
-        }
-        
-      } else {
-        this.purchasesByMonth.push({'month' : purchase.purchaseDate.getMonth(), 'year': purchase.purchaseDate.getFullYear(), 'purchases': [purchase]})
-      }
-    this.currentId ++;
   }
 
   getPurchases(): any {
@@ -53,6 +50,8 @@ export class PurchaseService {
         purchasesByMonth(purchaseMonth: "${dateString}") {
           title
           amount
+          purchaseDate
+          purchaseMonth
           purchaser {
             firstname
             lastname
@@ -65,6 +64,7 @@ export class PurchaseService {
             context: {
                 headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             },
+            fetchPolicy: 'network-only'
         }).result();
     this.purchasesByMonth = res.data['purchasesByMonth'];
     
@@ -74,7 +74,7 @@ export class PurchaseService {
   }
 
   getNewPurchase(): Purchase {
-    return {id:this.currentId , title: '', purchaser: '', purchaseDate: moment().toDate(), amount: 0.0 }
+    return {id: 0 , title: '', purchaser: '', purchaseDate: moment().toDate(), amount: 0.0 }
   }
 
   getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): any {
