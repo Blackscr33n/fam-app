@@ -1150,7 +1150,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _family_members_members_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./family/members/members.component */ "YAOp");
 /* harmony import */ var _services_family_service__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./_services/family.service */ "TQUI");
 /* harmony import */ var _graphql_module__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./graphql.module */ "4KHl");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/service-worker */ "Jho9");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../environments/environment */ "AytR");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @angular/core */ "fXoL");
 
 
 
@@ -1186,11 +1188,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 class AppModule {
 }
 AppModule.ɵfac = function AppModule_Factory(t) { return new (t || AppModule)(); };
-AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_20__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵdefineInjector"]({ providers: [
+AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_34__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_20__["AppComponent"]] });
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_34__["ɵɵdefineInjector"]({ providers: [
         { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _helpers_error_interceptor__WEBPACK_IMPORTED_MODULE_17__["ErrorInterceptor"], multi: true },
         { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _helpers_jwt_interceptor__WEBPACK_IMPORTED_MODULE_19__["JwtInterceptor"], multi: true },
         _services_family_service__WEBPACK_IMPORTED_MODULE_30__["FamilyService"],
@@ -1214,9 +1219,15 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵdefineInjecto
             _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_15__["MatMomentDateModule"],
             _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_16__["MatAutocompleteModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
-            _graphql_module__WEBPACK_IMPORTED_MODULE_31__["GraphQLModule"]
+            _graphql_module__WEBPACK_IMPORTED_MODULE_31__["GraphQLModule"],
+            _angular_service_worker__WEBPACK_IMPORTED_MODULE_32__["ServiceWorkerModule"].register('ngsw-worker.js', {
+                enabled: _environments_environment__WEBPACK_IMPORTED_MODULE_33__["environment"].production,
+                // Register the ServiceWorker as soon as the app is stable
+                // or after 30 seconds (whichever comes first).
+                registrationStrategy: 'registerWhenStable:30000'
+            })
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_20__["AppComponent"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_34__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_20__["AppComponent"],
         _todolist_todolist_component__WEBPACK_IMPORTED_MODULE_21__["TodolistComponent"],
         _todolist_add_todo_add_todo_component__WEBPACK_IMPORTED_MODULE_22__["AddTodoComponent"],
         _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_23__["NavbarComponent"],
@@ -1243,7 +1254,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵdefineInjecto
         _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_15__["MatMomentDateModule"],
         _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_16__["MatAutocompleteModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
-        _graphql_module__WEBPACK_IMPORTED_MODULE_31__["GraphQLModule"]] }); })();
+        _graphql_module__WEBPACK_IMPORTED_MODULE_31__["GraphQLModule"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_32__["ServiceWorkerModule"]] }); })();
 
 
 /***/ }),

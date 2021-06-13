@@ -1,0 +1,85 @@
+{
+  "configVersion": 1,
+  "timestamp": 1623590764826,
+  "index": "/fam-app/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/fam-app/account-account-module.js",
+        "/fam-app/favicon.ico",
+        "/fam-app/index.html",
+        "/fam-app/main.js",
+        "/fam-app/manifest.webmanifest",
+        "/fam-app/polyfills.js",
+        "/fam-app/runtime.js",
+        "/fam-app/styles.css",
+        "/fam-app/vendor.js"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/fam-app/assets/icons/icon-128x128.png",
+        "/fam-app/assets/icons/icon-144x144.png",
+        "/fam-app/assets/icons/icon-152x152.png",
+        "/fam-app/assets/icons/icon-192x192.png",
+        "/fam-app/assets/icons/icon-384x384.png",
+        "/fam-app/assets/icons/icon-512x512.png",
+        "/fam-app/assets/icons/icon-72x72.png",
+        "/fam-app/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/fam-app/account-account-module.js": "2aedab532f97fb9bf3ddffdf27e1b07de80de056",
+    "/fam-app/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/fam-app/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/fam-app/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/fam-app/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/fam-app/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/fam-app/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/fam-app/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/fam-app/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/fam-app/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/fam-app/index.html": "46d78f13ed4ca84ad6bc05746ffa73ab0acf93ca",
+    "/fam-app/main.js": "0288be1aab7def6069867286568cc0d5c7221eba",
+    "/fam-app/manifest.webmanifest": "9aaf07604943f4e5c52aaff0594bb3f326e47954",
+    "/fam-app/polyfills.js": "8df55ef08bb0d0c451e740074344e9edab952245",
+    "/fam-app/runtime.js": "4355177804a5a00c78f5e64eba888a9c2fc0020a",
+    "/fam-app/styles.css": "c504ee20e851955de915aef0c1f18e73cf013305",
+    "/fam-app/vendor.js": "4ecf7b37ad7ce2613d0128edc563935ce76f4058"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
