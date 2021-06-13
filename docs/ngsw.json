@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1623590764826,
+  "timestamp": 1623613052263,
   "index": "/fam-app/index.html",
   "assetGroups": [
     {
@@ -45,7 +45,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/fam-app/account-account-module.js": "2aedab532f97fb9bf3ddffdf27e1b07de80de056",
+    "/fam-app/account-account-module.js": "63f2ecbe1bf35ca94702483bee8fe16bf05ac3f6",
     "/fam-app/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/fam-app/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "/fam-app/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -56,7 +56,7 @@
     "/fam-app/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/fam-app/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
     "/fam-app/index.html": "46d78f13ed4ca84ad6bc05746ffa73ab0acf93ca",
-    "/fam-app/main.js": "0288be1aab7def6069867286568cc0d5c7221eba",
+    "/fam-app/main.js": "efa39e19036d258be211da2a8d54e18df8a34a43",
     "/fam-app/manifest.webmanifest": "9aaf07604943f4e5c52aaff0594bb3f326e47954",
     "/fam-app/polyfills.js": "8df55ef08bb0d0c451e740074344e9edab952245",
     "/fam-app/runtime.js": "4355177804a5a00c78f5e64eba888a9c2fc0020a",

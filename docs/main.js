@@ -26,23 +26,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_angular__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-angular */ "/IUn");
 /* harmony import */ var _apollo_client_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @apollo/client/core */ "ALmS");
 /* harmony import */ var apollo_angular_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! apollo-angular/http */ "E21e");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
 
 
 
 
-const uri = 'http://localhost:4000/graphql'; // <-- add the URL of the GraphQL server here
+
 function createApollo(httpLink) {
     return {
-        link: httpLink.create({ uri }),
+        link: httpLink.create({ uri: src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl }),
         cache: new _apollo_client_core__WEBPACK_IMPORTED_MODULE_1__["InMemoryCache"](),
     };
 }
 class GraphQLModule {
 }
 GraphQLModule.ɵfac = function GraphQLModule_Factory(t) { return new (t || GraphQLModule)(); };
-GraphQLModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({ type: GraphQLModule });
-GraphQLModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ providers: [
+GraphQLModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineNgModule"]({ type: GraphQLModule });
+GraphQLModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjector"]({ providers: [
         {
             provide: apollo_angular__WEBPACK_IMPORTED_MODULE_0__["APOLLO_OPTIONS"],
             useFactory: createApollo,
@@ -132,7 +133,6 @@ class AccountService {
     }
     register(user) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log(user);
             var firstname = user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
             var lastname = user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
             const register_mut = apollo_angular__WEBPACK_IMPORTED_MODULE_3__["gql"] `
@@ -455,9 +455,7 @@ class PurchaseListComponent {
     }
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            //this.purchaseService.getPurchases();
             this.purchases = yield this.purchaseService.getPurchasesByMonth(this.selectedDate);
-            console.log(this.purchases);
         });
     }
     onUpdateMonth() {
@@ -900,7 +898,6 @@ class FamilyService {
                     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
                 },
             }).result();
-            console.log(res.data['family']);
             this.family = res.data['family'];
             //this.family = data;
         });
@@ -975,7 +972,6 @@ class PurchaseService {
     }
     addPurchase(purchase) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log(purchase);
             const addPurchaseMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_2__["gql"] `
       mutation addPurchase {
         addPurchase(
@@ -990,11 +986,9 @@ class PurchaseService {
           email}, family, {name}}
       }
     `;
-            console.log("mutation: ", addPurchaseMutation);
             var res = yield this.apollo.mutate({
                 mutation: addPurchaseMutation
             }).toPromise();
-            console.log('addPurchaseRes: ', res);
             return res.data['purchase'];
         });
     }
@@ -1025,7 +1019,6 @@ class PurchaseService {
                 fetchPolicy: 'network-only'
             }).result();
             this.purchasesByMonth = res.data['purchasesByMonth'];
-            console.log('resData: ', res.data);
             return yield res.data['purchasesByMonth'];
         });
     }
@@ -1033,7 +1026,6 @@ class PurchaseService {
         return { id: 0, title: '', purchaser: '', purchaseDate: moment__WEBPACK_IMPORTED_MODULE_1__().toDate(), amount: 0.0 };
     }
     getSummaryOfPurchasesByMonth(selectedDate) {
-        console.log(this.purchasesByMonth);
         let summary = [{ user: 'Full expenditure', amount: 0 }];
         const foundMonth = this.purchasesByMonth.find(purchases => purchases.month == selectedDate.month() && purchases.year == selectedDate.year());
         if (foundMonth == undefined)
@@ -1535,11 +1527,7 @@ class JwtInterceptor {
         // add auth header with jwt if user is logged in and request is to the api url
         const user = this.accountService.userValue;
         const isLoggedIn = user && localStorage.getItem('token');
-        console.log("isLoggedIn:", isLoggedIn);
-        console.log("user:", user);
-        console.log('request.url', request.url);
         const isApiUrl = request.url.startsWith(_environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].apiUrl);
-        console.log("isApiUrl: ", isApiUrl);
         if (isLoggedIn && isApiUrl) {
             request = request.clone({
                 setHeaders: {
@@ -1806,7 +1794,6 @@ class PurchaseSummaryComponent {
         this.summary = 0.00;
     }
     ngOnChanges(changes) {
-        console.log(changes);
         if (changes.selectedDate.previousValue != undefined &&
             (changes.selectedDate.currentValue.year() != changes.selectedDate.previousValue.year()
                 ||
@@ -1816,7 +1803,6 @@ class PurchaseSummaryComponent {
     }
     ngOnInit() {
         this.summary = this.purchaseService.getSummaryOfPurchasesByMonth(this.selectedDate);
-        console.log(this.summary);
     }
 }
 PurchaseSummaryComponent.ɵfac = function PurchaseSummaryComponent_Factory(t) { return new (t || PurchaseSummaryComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_purchase_service__WEBPACK_IMPORTED_MODULE_2__["PurchaseService"])); };
@@ -1932,7 +1918,6 @@ class FamilyComponent {
     }
     ngOnInit() {
         this.accountService.getAll().subscribe((users) => {
-            console.log('users:', users);
             this.options = users;
         });
         this.family = this.familyService.familyValue;
@@ -2140,7 +2125,6 @@ class AddPurchaseComponent {
             this.loading = true;
             yield this.familyService.loadFamily();
             this.family = this.familyService.familyValue;
-            console.log(this.family);
             this.loading = false;
         });
     }

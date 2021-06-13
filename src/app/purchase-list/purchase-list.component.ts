@@ -17,9 +17,7 @@ export class PurchaseListComponent implements OnInit {
   constructor(private purchaseService: PurchaseService) { }
 
   async ngOnInit() {
-    //this.purchaseService.getPurchases();
     this.purchases = await this.purchaseService.getPurchasesByMonth(this.selectedDate);
-    console.log(this.purchases);
     
   }
 
