@@ -14,7 +14,6 @@ export class PurchaseService {
   purchasesByMonth: any[] = [];
 
   async addPurchase(purchase: Purchase) {
-    console.log(purchase);
     
     const addPurchaseMutation = gql`
       mutation addPurchase {
@@ -30,11 +29,9 @@ export class PurchaseService {
           email}, family, {name}}
       }
     `;
-      console.log("mutation: ", addPurchaseMutation);
     var res = await this.apollo.mutate({
             mutation: addPurchaseMutation
         }).toPromise();
-        console.log('addPurchaseRes: ', res);
         
         return res.data['purchase'];
     
@@ -68,7 +65,6 @@ export class PurchaseService {
         }).result();
     this.purchasesByMonth = res.data['purchasesByMonth'];
     
-    console.log('resData: ', res.data);
 
     return await res.data['purchasesByMonth'] as Purchase[]; 
   }
@@ -78,7 +74,6 @@ export class PurchaseService {
   }
 
   getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): any {
-    console.log(this.purchasesByMonth);
     
     let summary: any[] = [{user: 'Full expenditure', amount: 0}];
     const foundMonth = this.purchasesByMonth.find( purchases => purchases.month == selectedDate.month() && purchases.year == selectedDate.year());

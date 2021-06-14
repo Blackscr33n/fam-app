@@ -28,7 +28,6 @@ export class AddPurchaseComponent implements OnInit {
     this.loading = true;
     await this.familyService.loadFamily();
     this.family = this.familyService.familyValue;
-    console.log(this.family);
     
     this.loading = false;
   }

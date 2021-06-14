@@ -21,7 +21,6 @@ export class FamilyComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getAll().subscribe((users) => {
-      console.log('users:', users);
       
       this.options = users;
     });

@@ -63,7 +63,6 @@ export class AccountService {
     }
 
     async register(user: User) {
-        console.log(user);
         var firstname = user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
         var lastname = user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
         const register_mut = gql`

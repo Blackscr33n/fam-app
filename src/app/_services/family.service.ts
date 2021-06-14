@@ -36,7 +36,6 @@ export class FamilyService implements OnInit {
                 headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             },
         }).result();
-        console.log(res.data['family']);
         this.family = res.data['family'];
         //this.family = data;
     }

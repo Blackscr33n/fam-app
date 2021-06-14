@@ -13,7 +13,6 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges {
 
   constructor(private purchaseService: PurchaseService) { }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if(
       changes.selectedDate.previousValue != undefined &&
       (changes.selectedDate.currentValue.year() != changes.selectedDate.previousValue.year()
@@ -27,6 +26,5 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.summary = this.purchaseService.getSummaryOfPurchasesByMonth(this.selectedDate);
-    console.log(this.summary);
   }
 }
