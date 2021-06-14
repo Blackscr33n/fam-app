@@ -15,7 +15,7 @@
           </mat-nav-list>
           <mat-divider [inset]="false" ></mat-divider>
           <mat-nav-list>
-            <a mat-list-item [routerLink]="'/account/login'"> Login </a>
+            <a mat-list-item (click)="closeNav()" [routerLink]="'/account/login'"> Login </a>
             <a mat-list-item (click)="logout()"> Logout </a>
           </mat-nav-list>
     </mat-sidenav>
