@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1623613052263,
+  "timestamp": 1623675714658,
   "index": "/fam-app/index.html",
   "assetGroups": [
     {
@@ -11,15 +11,14 @@
         "ignoreVary": true
       },
       "urls": [
-        "/fam-app/account-account-module.js",
+        "/fam-app/4.fc6e0c3f4ce11f18e247.js",
         "/fam-app/favicon.ico",
         "/fam-app/index.html",
-        "/fam-app/main.js",
+        "/fam-app/main.9b599a082573933620bf.js",
         "/fam-app/manifest.webmanifest",
-        "/fam-app/polyfills.js",
-        "/fam-app/runtime.js",
-        "/fam-app/styles.css",
-        "/fam-app/vendor.js"
+        "/fam-app/polyfills.94daefd414b8355106ab.js",
+        "/fam-app/runtime.3e9b7c356f4859dae406.js",
+        "/fam-app/styles.e257e06d1cba7d6f365a.css"
       ],
       "patterns": []
     },
@@ -45,7 +44,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/fam-app/account-account-module.js": "63f2ecbe1bf35ca94702483bee8fe16bf05ac3f6",
+    "/fam-app/4.fc6e0c3f4ce11f18e247.js": "cb23153674057d96c6d3f684f6c8525003684c13",
     "/fam-app/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/fam-app/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "/fam-app/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -55,13 +54,12 @@
     "/fam-app/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/fam-app/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/fam-app/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/fam-app/index.html": "46d78f13ed4ca84ad6bc05746ffa73ab0acf93ca",
-    "/fam-app/main.js": "efa39e19036d258be211da2a8d54e18df8a34a43",
+    "/fam-app/index.html": "92b78aa54e4f5cd7df3a21ef4bf538287bad739c",
+    "/fam-app/main.9b599a082573933620bf.js": "61ad944ab616a0b4104ec3198191f632a33c5983",
     "/fam-app/manifest.webmanifest": "9aaf07604943f4e5c52aaff0594bb3f326e47954",
-    "/fam-app/polyfills.js": "8df55ef08bb0d0c451e740074344e9edab952245",
-    "/fam-app/runtime.js": "4355177804a5a00c78f5e64eba888a9c2fc0020a",
-    "/fam-app/styles.css": "c504ee20e851955de915aef0c1f18e73cf013305",
-    "/fam-app/vendor.js": "4ecf7b37ad7ce2613d0128edc563935ce76f4058"
+    "/fam-app/polyfills.94daefd414b8355106ab.js": "cfe7b0b53e96bff9ba384b4d497c08475a617d62",
+    "/fam-app/runtime.3e9b7c356f4859dae406.js": "bbdad0fa447dcccc5879d023bad110e8d614b1cc",
+    "/fam-app/styles.e257e06d1cba7d6f365a.css": "d3dd2b4d157a0ce2262e1cbdb286feda18eff3e3"
   },
   "navigationUrls": [
     {
