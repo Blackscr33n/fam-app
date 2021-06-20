@@ -73,25 +73,64 @@ export class PurchaseService {
     return {id: 0 , title: '', purchaser: '', purchaseDate: moment().toDate(), amount: 0.0 }
   }
 
-  getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): any {
+  
+  async getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): Promise<any> {
     
-    let summary: any[] = [{user: 'Full expenditure', amount: 0}];
-    const foundMonth = this.purchasesByMonth.find( purchases => purchases.month == selectedDate.month() && purchases.year == selectedDate.year());
-    if(foundMonth == undefined) return 0;
-
-    // { 'user': 'Nicole', 'amount' : 100 }
-    foundMonth.purchases.forEach( (purchase: any) => {
-      let userSummary = summary.find(entry => entry.user == purchase.purchaser);
-      
-      if(userSummary != undefined) {
-        userSummary.amount += purchase.amount;
-      } else {
-        summary.push({user: purchase.purchaser, amount: purchase.amount});
+    const dateString = selectedDate.format("YYYY-MM");
+    const monthlyExpenses = gql`
+      query calculateMonthlyExpenses {
+        calculateMonthlyExpenses(purchaseMonth: "${dateString}")
+        {
+          month
+          totalExpenses
+          userExpenses 
+          {
+            purchaser {
+              firstname
+              lastname
+              id
+            }
+            amount
+            month
+          }
+          owes
+          {
+            debtor {
+              firstname
+              lastname
+              id
+            }
+            creditor {
+              firstname
+              lastname
+              id
+            }
+            amount
+          }
+        }
       }
+    `
+    const res = await this.apollo.watchQuery<any>({
+      query: monthlyExpenses,
+      context: {
+          headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+      },
+      fetchPolicy: 'network-only'
+    }).result();
 
-      summary[0].amount += purchase.amount;
+    return await res.data['calculateMonthlyExpenses']; 
 
+  }
+
+  getPieChartData(data: any[]) {
+    let pieChartData = [];
+
+    data.forEach(elem => {
+      pieChartData.push({
+        name: elem.purchaser.firstname,
+        value: elem.amount
+      });
     });
-    return summary;
+    return pieChartData;
   }
 }
