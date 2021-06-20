@@ -6,11 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// Material Design Modules
-
-
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-import { fakeBackendProvider } from './_helpers/fake-backend.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 import { AppComponent } from './app.component';
@@ -28,6 +24,7 @@ import { GraphQLModule } from './graphql.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './_helpers/material.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -51,6 +48,7 @@ import { MaterialModule } from './_helpers/material.module';
     MaterialModule,
     ReactiveFormsModule,
     GraphQLModule,
+    NgxChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -61,8 +59,7 @@ import { MaterialModule } from './_helpers/material.module';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    FamilyService,
-    fakeBackendProvider
+    FamilyService
   ],
   bootstrap: [AppComponent]
 })

@@ -12,7 +12,19 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MAT_DATE_FORMATS} from '@angular/material/core';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [],
@@ -29,6 +41,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatDatepickerModule,
     MatMomentDateModule,
     MatAutocompleteModule,
+  ],
+  providers: [
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
 export class MaterialModule { }
