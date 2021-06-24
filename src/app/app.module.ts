@@ -6,22 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// Material Design Modules
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatTableModule} from '@angular/material/table';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-import { fakeBackendProvider } from './_helpers/fake-backend.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 import { AppComponent } from './app.component';
@@ -38,6 +23,8 @@ import { FamilyService } from './_services/family.service';
 import { GraphQLModule } from './graphql.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MaterialModule } from './_helpers/material.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -58,20 +45,10 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    MatTableModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatMomentDateModule,
-    MatAutocompleteModule,
+    MaterialModule,
     ReactiveFormsModule,
     GraphQLModule,
+    NgxChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -82,8 +59,7 @@ import { environment } from '../environments/environment';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    FamilyService,
-    fakeBackendProvider
+    FamilyService
   ],
   bootstrap: [AppComponent]
 })

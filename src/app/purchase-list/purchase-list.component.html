@@ -43,7 +43,7 @@
     <span>No purchases available</span>
   </div>
   <mat-divider></mat-divider>
-  <app-purchase-summary [selectedDate]="selectedDate"></app-purchase-summary>
+  <app-purchase-summary *ngIf="purchases.length != 0" [selectedDate]="selectedDate"></app-purchase-summary>
 </div>
 <button mat-fab color="primary" [routerLink]="'/add-purchase'" class="add-purchase-btn"
   aria-label="icon button with a add icon">

@@ -1,4 +1,26 @@
-<div>
-    <p *ngFor="let expenditure of summary">{{expenditure.user}}: {{expenditure.amount | currency : 'EUR'}}</p>
+<div *ngIf="summary">
+    <!--p *ngFor="let userExpense of summary.userExpenses">
+        {{userExpense.purchaser.firstname + ' ' + userExpense.purchaser.lastname }}: {{userExpense.amount | currency : 'EUR'}}
+    </p-->
+    <p *ngFor="let owe of summary.owes">
+        {{owe.debtor.firstname + ' ' + owe.debtor.lastname}} 
+        owes {{owe.creditor.firstname + ' ' + owe.creditor.lastname}}
+        &nbsp;{{owe.amount | currency: 'EUR'}}
+    </p>
+
+    <ngx-charts-pie-chart *ngIf="pieChartData"
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="pieChartData"
+    [gradient]="gradient"
+    [legend]="showLegend"
+    [legendPosition]="legendPosition"
+    [labels]="showLabels"
+    [doughnut]="isDoughnut"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+    >
+    </ngx-charts-pie-chart>
 
 </div>

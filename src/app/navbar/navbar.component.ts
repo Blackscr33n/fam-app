@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -6,14 +6,11 @@ import { AccountService } from '../_services/account.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   opened: boolean = false;
 
   constructor(private accountService: AccountService) { }
-
-  ngOnInit(): void {
-  }
 
   toggleNav(): void {
     this.opened = !this.opened;
@@ -24,6 +21,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    this.closeNav();
     this.accountService.logout();
   }
 
