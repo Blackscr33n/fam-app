@@ -1,7 +1,7 @@
 {
   "configVersion": 1,
-  "timestamp": 1624564092428,
-  "index": "fam-app.com/index.html",
+  "timestamp": 1624564795010,
+  "index": "/index.html",
   "assetGroups": [
     {
       "name": "app",
@@ -11,14 +11,14 @@
         "ignoreVary": true
       },
       "urls": [
-        "fam-app.com/4.4247bc334ee5dd2a4a25.js",
-        "fam-app.com/favicon.ico",
-        "fam-app.com/index.html",
-        "fam-app.com/main.d4abb607d43414ddc39f.js",
-        "fam-app.com/manifest.webmanifest",
-        "fam-app.com/polyfills.94daefd414b8355106ab.js",
-        "fam-app.com/runtime.3634489ee658bf0c8df2.js",
-        "fam-app.com/styles.048cdd69a573c3dc30e9.css"
+        "/4.4247bc334ee5dd2a4a25.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main.d4abb607d43414ddc39f.js",
+        "/manifest.webmanifest",
+        "/polyfills.94daefd414b8355106ab.js",
+        "/runtime.3634489ee658bf0c8df2.js",
+        "/styles.048cdd69a573c3dc30e9.css"
       ],
       "patterns": []
     },
@@ -30,36 +30,36 @@
         "ignoreVary": true
       },
       "urls": [
-        "fam-app.com/assets/icons/icon-128x128.png",
-        "fam-app.com/assets/icons/icon-144x144.png",
-        "fam-app.com/assets/icons/icon-152x152.png",
-        "fam-app.com/assets/icons/icon-192x192.png",
-        "fam-app.com/assets/icons/icon-384x384.png",
-        "fam-app.com/assets/icons/icon-512x512.png",
-        "fam-app.com/assets/icons/icon-72x72.png",
-        "fam-app.com/assets/icons/icon-96x96.png"
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "fam-app.com/4.4247bc334ee5dd2a4a25.js": "83acdcb788dd2d9ecbc7e375a974efded0a3c051",
-    "fam-app.com/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
-    "fam-app.com/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
-    "fam-app.com/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
-    "fam-app.com/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
-    "fam-app.com/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
-    "fam-app.com/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
-    "fam-app.com/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
-    "fam-app.com/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
-    "fam-app.com/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "fam-app.com/index.html": "86ca0d7f6b55dc8598aac734b0c85d9cdee97fb3",
-    "fam-app.com/main.d4abb607d43414ddc39f.js": "1328afabf97b653eccd9db4488614c94e30f3425",
-    "fam-app.com/manifest.webmanifest": "9aaf07604943f4e5c52aaff0594bb3f326e47954",
-    "fam-app.com/polyfills.94daefd414b8355106ab.js": "cfe7b0b53e96bff9ba384b4d497c08475a617d62",
-    "fam-app.com/runtime.3634489ee658bf0c8df2.js": "9c2c93cfcbbf39caf2553fa0983886109156002a",
-    "fam-app.com/styles.048cdd69a573c3dc30e9.css": "8958e6a7e153886cd47f912f9317e2d63e418382"
+    "/4.4247bc334ee5dd2a4a25.js": "83acdcb788dd2d9ecbc7e375a974efded0a3c051",
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "ce6987ae7411e4797b7f5ba5f8eaacd4df038809",
+    "/main.d4abb607d43414ddc39f.js": "1328afabf97b653eccd9db4488614c94e30f3425",
+    "/manifest.webmanifest": "9aaf07604943f4e5c52aaff0594bb3f326e47954",
+    "/polyfills.94daefd414b8355106ab.js": "cfe7b0b53e96bff9ba384b4d497c08475a617d62",
+    "/runtime.3634489ee658bf0c8df2.js": "9c2c93cfcbbf39caf2553fa0983886109156002a",
+    "/styles.048cdd69a573c3dc30e9.css": "8958e6a7e153886cd47f912f9317e2d63e418382"
   },
   "navigationUrls": [
     {
