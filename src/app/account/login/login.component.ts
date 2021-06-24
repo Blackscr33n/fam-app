@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
+    error: String;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         var user = await this.accountService.login(this.f.username.value, this.f.password.value).catch((err) => {
             this.alertService.error(err);
+            this.error = err;
             console.error(err);
             this.submitted = false;
             this.loading = false;
