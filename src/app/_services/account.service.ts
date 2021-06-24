@@ -26,7 +26,7 @@ export class AccountService {
     }
 
 
-    async login(username, password) {
+    public async login(username, password) {
         const login_cred = gql`
             mutation login
             {
