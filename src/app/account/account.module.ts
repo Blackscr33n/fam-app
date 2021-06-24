@@ -6,12 +6,14 @@ import { AccountRoutingModule } from './account-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MaterialModule } from '../_helpers/material.module';
 
 @NgModule({
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        AccountRoutingModule
+        AccountRoutingModule,
+        MaterialModule
     ],
     declarations: [
         LayoutComponent,

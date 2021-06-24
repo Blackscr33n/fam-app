@@ -12,7 +12,7 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges {
   @Input() selectedDate: moment.Moment = moment();
   summary;
   pieChartData;
-  view: [number, number] = [700, 400];
+  view: [number, number] = [window.innerWidth, 300];
 
   gradient: boolean = true;
   showLegend: boolean = false;

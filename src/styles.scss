@@ -1,25 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&family=Ovo&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.container {
-    margin-left: 5vh;
-    margin-right: 5vh;
-    margin-top: 2vh;
+html,
+body {
+  height: 100%;
 }
 
-h1,h2 {
-    font: 36px 'Ovo', serif !important;
+body {
+  margin: 0;
+  font-family: Mulish, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  margin-left: 5vh;
+  margin-right: 5vh;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+h1,
+h2 {
+  font: 36px 'Ovo', serif !important;
 
 }
 
 div {
-    font: 15px/21px 'Mulish', sans-serif !important;
-    font-weight: 300;
+  font: 15px/21px 'Mulish', sans-serif !important;
+  font-weight: 300;
 }
 
 .mat-drawer-content {
-    overflow: inherit !important;
+  overflow: inherit !important;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form>* {
+  margin-top: 1rem;
 }
