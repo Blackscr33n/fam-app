@@ -34,6 +34,7 @@
                     [disabled]="loading"
                     mat-flat-button
                     color="primary"
+                    type="submit"
                 >
                     <span
                         *ngIf="loading"
@@ -44,6 +45,7 @@
                 <button
                     mat-button
                     routerLink="../register"
+                    type="button"
                 >
                     Register
                 </button>
@@ -51,3 +53,10 @@
         </form>
     </mat-card-content>
 </mat-card>
+<div
+    *ngIf="error"
+    class="error"
+>
+    <mat-icon>warning</mat-icon>
+    {{error}}
+</div>
