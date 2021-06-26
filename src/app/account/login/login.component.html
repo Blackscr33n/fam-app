@@ -53,3 +53,10 @@
         </form>
     </mat-card-content>
 </mat-card>
+<div
+    *ngIf="error"
+    class="error"
+>
+    <mat-icon>warning</mat-icon>
+    {{error}}
+</div>

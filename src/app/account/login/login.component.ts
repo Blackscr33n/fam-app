@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit {
         var user = await this.accountService.login(this.f.username.value, this.f.password.value).catch((err) => {
             this.alertService.error(err);
             this.error = err;
-            console.error(err);
             this.submitted = false;
             this.loading = false;
         })
