@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -6,11 +6,20 @@ import { AccountService } from '../_services/account.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements DoCheck {
 
   opened: boolean = false;
+  isLoggedIn: boolean = false;
 
   constructor(private accountService: AccountService) { }
+
+  ngDoCheck(): void {
+    if(this.accountService.userValue) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
+  }
 
   toggleNav(): void {
     this.opened = !this.opened;
