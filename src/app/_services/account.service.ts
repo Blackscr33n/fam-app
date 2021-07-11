@@ -88,10 +88,6 @@ export class AccountService {
         return res.data['register'];
     }
 
-    getAll() {
-        return this.http.get<User[]>(`${environment.apiUrl}/users`);
-    }
-
     private GET_USER = gql`
         query user {
             user {

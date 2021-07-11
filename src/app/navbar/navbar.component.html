@@ -2,14 +2,14 @@
     <button mat-icon-button  aria-label="icon-button with menu icon" (click)="toggleNav()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Fam App {{isLoggedIn}}</span>
+      <span>Fam App</span>
 </mat-toolbar>
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="over" [(opened)]="opened" >
         <mat-nav-list *ngIf="isLoggedIn">
-            <a mat-list-item (click)="closeNav()" [routerLink]="'/todos'"> Todos </a>
-            <mat-divider [inset]="false" ></mat-divider>
+            <!--a mat-list-item (click)="closeNav()" [routerLink]="'/todos'"> Todos </a>
+            <mat-divider [inset]="false" ></mat-divider-->
             <a mat-list-item (click)="closeNav()" [routerLink]="'/purchase-list'"> Purchases </a>
             <a mat-list-item (click)="closeNav()" [routerLink]="'/family'"> Family </a>
           </mat-nav-list>

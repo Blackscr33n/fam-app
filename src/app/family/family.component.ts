@@ -20,10 +20,7 @@ export class FamilyComponent implements OnInit {
   constructor(private accountService: AccountService, private familyService: FamilyService) { }
 
   ngOnInit(): void {
-    this.accountService.getAll().subscribe((users) => {
-      
-      this.options = users;
-    });
+    
     this.family = this.familyService.familyValue;
 
     this.filteredOptions = this.userControl.valueChanges
