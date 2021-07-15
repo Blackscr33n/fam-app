@@ -4,9 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Apollo, gql } from 'apollo-angular';
 
-import { environment } from '../../environments/environment';
 import { User } from '../_models';
-
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -15,7 +13,6 @@ export class AccountService {
 
     constructor(
         private router: Router,
-        private http: HttpClient,
         private apollo: Apollo
     ) {
         this.initUser();

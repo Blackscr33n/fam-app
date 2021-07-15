@@ -5,7 +5,6 @@ import { Apollo, gql } from 'apollo-angular';
 import { HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { User } from '../_models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +13,7 @@ export class PurchaseService {
 
   constructor(private apollo: Apollo) { }
 
-  purchasesByMonth: any[] = [];
-
-  addPurchase(purchase: Purchase): Observable<Purchase> {
+  public addPurchase(purchase: Purchase): Observable<Purchase> {
 
     const addPurchaseMutation = gql`
       mutation addPurchase {
@@ -41,7 +38,7 @@ export class PurchaseService {
 
   }
 
-  getPurchasesByMonth(selectedDate: moment.Moment): Observable<Purchase> {
+  public getPurchasesByMonth(selectedDate: moment.Moment): Observable<Purchase[]> {
     const dateString = selectedDate.format("YYYY-MM");
     const purchaseByMonthQuery = gql`
       query purchasesByMonth {
@@ -57,8 +54,9 @@ export class PurchaseService {
           }
         }
       }
-    `
-    const res = this.apollo.watchQuery<any>({
+    `;
+
+    return this.apollo.watchQuery<any>({
       query: purchaseByMonthQuery,
       context: {
         headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
@@ -70,10 +68,9 @@ export class PurchaseService {
       ))
     );
 
-    return res;
   }
 
-  getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): Observable<Purchase> {
+  public getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): Observable<Purchase[]> {
 
     const dateString = selectedDate.format("YYYY-MM");
     const monthlyExpenses = gql`
@@ -123,7 +120,7 @@ export class PurchaseService {
 
   }
 
-  getPieChartData(data: any[]) {
+  public getPieChartData(data: any[]): any[] {
     let pieChartData = [];
 
     data.forEach(elem => {

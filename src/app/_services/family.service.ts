@@ -1,10 +1,10 @@
 import { HttpHeaders } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { Apollo, gql } from "apollo-angular";
+import { map } from "rxjs/operators";
 import { User } from "../_models";
-import { Family } from "../_models/family";
+import { Family, FamilyResponse } from "../_models/family";
 import { AccountService } from "./account.service";
-
 
 @Injectable({ providedIn: 'root' })
 export class FamilyService implements OnInit {
@@ -20,7 +20,7 @@ export class FamilyService implements OnInit {
         }
     }
 
-    public async loadFamily() {
+    public loadFamily() {
         const getFamily = gql`
         query family {
             family {
@@ -29,13 +29,15 @@ export class FamilyService implements OnInit {
             }
         }
         `;
-        const res = await this.apollo.watchQuery<any>({
+        this.apollo.watchQuery<any>({
             query: getFamily,
             context: {
                 headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             },
-        }).result();
-        this.family = res.data['family'];
+        }).valueChanges.pipe(
+            map(response => response.data['family']),
+            map((response: FamilyResponse) => new Family(response))
+        ).subscribe((family: Family) => this.family = family);
     }
 
     public get familyValue(): Family {
