@@ -21,7 +21,7 @@ export class AddPurchaseComponent implements OnInit {
     private router: Router,
     private familyService: FamilyService
     ) {
-    this.purchase = this.purchaseService.getNewPurchase();
+    this.purchase = new Purchase();
   }
 
   async ngOnInit() {
@@ -34,7 +34,7 @@ export class AddPurchaseComponent implements OnInit {
 
   savePurchase() {
     this.purchaseService.addPurchase(this.purchase);
-    this.purchase = this.purchaseService.getNewPurchase();
+    this.purchase = new Purchase();
     this.goToPurchaseList();
   }
 

@@ -1,5 +1,4 @@
 import { HttpHeaders } from "@angular/common/http";
-import { ThisReceiver } from "@angular/compiler";
 import { Injectable, OnInit } from "@angular/core";
 import { Apollo, gql } from "apollo-angular";
 import { User } from "../_models";
@@ -7,16 +6,16 @@ import { Family } from "../_models/family";
 import { AccountService } from "./account.service";
 
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class FamilyService implements OnInit {
-    private family: Family = new Family('0', '', []);
+    private family: Family = new Family();
 
     constructor(
         private accountService: AccountService,
-        private apollo: Apollo) {}
+        private apollo: Apollo) { }
 
     ngOnInit(): void {
-        if(this.accountService.userValue) {
+        if (this.accountService.userValue) {
             this.loadFamily();
         }
     }
@@ -37,7 +36,6 @@ export class FamilyService implements OnInit {
             },
         }).result();
         this.family = res.data['family'];
-        //this.family = data;
     }
 
     public get familyValue(): Family {
@@ -54,7 +52,7 @@ export class FamilyService implements OnInit {
                     )
             }
         `;
-        
+
         return await this.apollo.mutate({
             mutation: addFamily_cred
         }).toPromise();
@@ -69,7 +67,7 @@ export class FamilyService implements OnInit {
                     )
             }
         `;
-        
+
         return await this.apollo.mutate({
             mutation: addFamilyMember_mutation
         }).toPromise();
