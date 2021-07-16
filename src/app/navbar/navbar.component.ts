@@ -8,13 +8,13 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavbarComponent implements DoCheck {
 
-  opened: boolean = false;
-  isLoggedIn: boolean = false;
+  opened = false;
+  isLoggedIn = false;
 
   constructor(private accountService: AccountService) { }
 
   ngDoCheck(): void {
-    if(this.accountService.userValue) {
+    if (this.accountService.userValue) {
       this.isLoggedIn = true;
     } else {
       this.isLoggedIn = false;
@@ -29,7 +29,7 @@ export class NavbarComponent implements DoCheck {
     this.opened = false;
   }
 
-  logout() {
+  logout(): void {
     this.closeNav();
     this.accountService.logout();
   }

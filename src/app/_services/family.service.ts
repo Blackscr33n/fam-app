@@ -1,26 +1,21 @@
-import { HttpHeaders } from "@angular/common/http";
-import { Injectable, OnInit } from "@angular/core";
-import { Apollo, gql } from "apollo-angular";
-import { map } from "rxjs/operators";
-import { User } from "../_models";
-import { Family, FamilyResponse } from "../_models/family";
-import { AccountService } from "./account.service";
+import { HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { User } from '../_models';
+import { Family, FamilyResponse } from '../_models/family';
 
 @Injectable({ providedIn: 'root' })
-export class FamilyService implements OnInit {
-    private family: Family = new Family();
+export class FamilyService {
+    private family: Family;
 
     constructor(
-        private accountService: AccountService,
-        private apollo: Apollo) { }
-
-    ngOnInit(): void {
-        if (this.accountService.userValue) {
-            this.loadFamily();
-        }
+        private apollo: Apollo) {
+        this.family = new Family();
     }
 
-    public loadFamily() {
+    public loadFamily(): void {
         const getFamily = gql`
         query family {
             family {
@@ -35,7 +30,7 @@ export class FamilyService implements OnInit {
                 headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             },
         }).valueChanges.pipe(
-            map(response => response.data['family']),
+            map(response => response.data.family),
             map((response: FamilyResponse) => new Family(response))
         ).subscribe((family: Family) => this.family = family);
     }
@@ -44,34 +39,41 @@ export class FamilyService implements OnInit {
         return this.family;
     }
 
-    async addFamily(family: Family) {
-        const addFamily_cred = gql`
+    addFamily(family: Family): Observable<Family> {
+        const addFamilyCred = gql`
             mutation addFamily
             {
                 addFamily(
-                    name: "${family.name}",
-                    members: "${family.members}"
+                    name: '${family.name}',
+                    members: '${family.members}'
                     )
             }
         `;
 
-        return await this.apollo.mutate({
-            mutation: addFamily_cred
-        }).toPromise();
+        return this.apollo.mutate({
+            mutation: addFamilyCred
+        }).pipe(
+            map( (response: any) => response.data.addFamily),
+            map((response: FamilyResponse) => new Family(response))
+        );
     }
 
-    async addFamilyMember(user: User) {
-        const addFamilyMember_mutation = gql`
+    addFamilyMember(user: User): Observable<Family> {
+        const addFamilyMemberMutation = gql`
             mutation addFamilyMember
             {
-                addFamily(
-                    userId: "${user.id}"
+                addFamilyMember(
+                    userId: '${user.id}'
                     )
+                    {name, members {id, firstname, lastname}}
             }
         `;
 
-        return await this.apollo.mutate({
-            mutation: addFamilyMember_mutation
-        }).toPromise();
+        return this.apollo.mutate({
+            mutation: addFamilyMemberMutation
+        }).pipe(
+            map( (response: any) => response.data.addFamilyMember),
+            map( (response: FamilyResponse) => new Family(response))
+        );
     }
 }

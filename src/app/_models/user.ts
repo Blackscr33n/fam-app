@@ -13,7 +13,7 @@ export class User {
     lastname: string;
     token: string;
     password: string;
-    
+
     constructor(response: UserResponse) {
         this.id = response.id;
         this.username = response.username;

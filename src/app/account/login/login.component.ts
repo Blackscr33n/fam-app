@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AccountService } from '../../_services/account.service';
@@ -27,21 +27,20 @@ export class LoginComponent implements OnInit {
         private familyService: FamilyService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.form = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
 
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-        
+        this.returnUrl = this.route.snapshot.queryParams?.returnUrl || '/';
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.form.controls; }
+    get f(): { [key: string]: AbstractControl } { return this.form.controls; }
 
-    async onSubmit() {
+    async onSubmit(): Promise<void> {
         this.submitted = true;
 
         // reset alerts on submit
@@ -53,17 +52,17 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        var user = await this.accountService.login(this.f.username.value, this.f.password.value).catch((err) => {
+        const user = await this.accountService.login(this.f.username.value, this.f.password.value).catch((err) => {
             this.alertService.error(err);
             this.error = err;
             this.submitted = false;
             this.loading = false;
-        })
-        
-        if(user) {
+        });
+
+        if (user) {
             this.familyService.loadFamily();
             this.router.navigate([this.returnUrl]);
         }
     }
-    
+
 }

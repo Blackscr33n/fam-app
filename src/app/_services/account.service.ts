@@ -22,9 +22,18 @@ export class AccountService {
         return this.userSubject.value;
     }
 
+    private GET_USER = gql`
+        query user {
+            user {
+                email
+                firstname
+                lastname
+            }
+        }
+    `;
 
-    public async login(username, password) {
-        const login_cred = gql`
+    public async login(username, password): Promise<User> {
+        const loginCred = gql`
             mutation login
             {
                 login(
@@ -33,12 +42,12 @@ export class AccountService {
                     )
             }
         `;
-        
-        var res = await this.apollo.mutate({
-            mutation: login_cred
+
+        const res = await this.apollo.mutate({
+            mutation: loginCred
         }).toPromise();
-        
-        localStorage.setItem('token', res.data['login']);
+
+        localStorage.setItem('token', (res.data as any).login);
         const userRes = await this.getByUsername();
         localStorage.setItem('user', JSON.stringify(userRes.data.user));
         this.initUser();
@@ -46,12 +55,12 @@ export class AccountService {
         return this.userValue;
     }
 
-    initUser() {
+    initUser(): void {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
     }
 
-    logout() {
+    logout(): void {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
         localStorage.removeItem('token');
@@ -59,10 +68,10 @@ export class AccountService {
         this.router.navigate(['/account/login']);
     }
 
-    async register(user: User) {
-        var firstname = user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
-        var lastname = user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
-        const register_mut = gql`
+    async register(user: User): Promise<any> {
+        const firstname = user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
+        const lastname = user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
+        const registerMutation = gql`
         mutation register {
             register (
                 firstname: "${firstname}"
@@ -74,26 +83,16 @@ export class AccountService {
         }
         `;
 
-        var res = await this.apollo.mutate({
-            mutation: register_mut
+        const res = await this.apollo.mutate({
+            mutation: registerMutation
         }).toPromise();
 
-        if(res.errors) {
-            throw new Error(res.errors[0].message)
+        if (res.errors) {
+            throw new Error(res.errors[0].message);
         }
 
-        return res.data['register'];
+        return (res.data as any).register;
     }
-
-    private GET_USER = gql`
-        query user {
-            user {
-                email
-                firstname
-                lastname
-            }
-        }
-    `;
 
     getByUsername(): Promise<any> {
         return this.apollo.watchQuery<any>({
@@ -102,8 +101,7 @@ export class AccountService {
                 // example of setting the headers with context per operation
                 headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             },
-        }).result()
+        }).result();
     }
-
 
 }

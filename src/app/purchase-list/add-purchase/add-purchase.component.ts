@@ -14,35 +14,35 @@ export class AddPurchaseComponent implements OnInit {
 
   purchase: Purchase;
   family: Family;
-  loading: Boolean;
+  loading: boolean;
 
   constructor(
     private purchaseService: PurchaseService,
     private router: Router,
     private familyService: FamilyService
-    ) {
+  ) {
     this.purchase = new Purchase();
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.loading = true;
     await this.familyService.loadFamily();
     this.family = this.familyService.familyValue;
-    
+
     this.loading = false;
   }
 
-  savePurchase() {
+  savePurchase(): void {
     this.purchaseService.addPurchase(this.purchase);
     this.purchase = new Purchase();
     this.goToPurchaseList();
   }
 
-  cancel() {
+  cancel(): void {
     this.goToPurchaseList();
   }
 
-  goToPurchaseList() {
+  goToPurchaseList(): void {
     this.router.navigate(['purchase-list']);
   }
 

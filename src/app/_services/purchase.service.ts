@@ -32,17 +32,17 @@ export class PurchaseService {
     return this.apollo.mutate({
       mutation: addPurchaseMutation
     }).pipe(
-      map(response => response.data['purchase']),
+      map((response: any) => response.data.purchase),
       map(response => response.map((item: PurchaseResponse) => new Purchase(item)))
     );
 
   }
 
   public getPurchasesByMonth(selectedDate: moment.Moment): Observable<Purchase[]> {
-    const dateString = selectedDate.format("YYYY-MM");
+    const dateString = selectedDate.format('YYYY-MM');
     const purchaseByMonthQuery = gql`
       query purchasesByMonth {
-        purchasesByMonth(purchaseMonth: "${dateString}") {
+        purchasesByMonth(purchaseMonth: '${dateString}'') {
           id
           title
           amount
@@ -63,7 +63,7 @@ export class PurchaseService {
       },
       fetchPolicy: 'network-only'
     }).valueChanges.pipe(
-      map(response => response.data['purchasesByMonth']),
+      map(response => response.data.purchasesByMonth),
       map(response => response.map((item: PurchaseResponse) => new Purchase(item)
       ))
     );
@@ -72,14 +72,14 @@ export class PurchaseService {
 
   public getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): Observable<Purchase[]> {
 
-    const dateString = selectedDate.format("YYYY-MM");
+    const dateString = selectedDate.format('YYYY-MM');
     const monthlyExpenses = gql`
       query calculateMonthlyExpenses {
         calculateMonthlyExpenses(purchaseMonth: "${dateString}")
         {
           month
           totalExpenses
-          userExpenses 
+          userExpenses
           {
             purchaser {
               firstname
@@ -105,7 +105,8 @@ export class PurchaseService {
           }
         }
       }
-    `
+    `;
+
     return this.apollo.watchQuery<any>({
       query: monthlyExpenses,
       context: {
@@ -113,7 +114,7 @@ export class PurchaseService {
       },
       fetchPolicy: 'network-only'
     }).valueChanges.pipe(
-      map(response => response.data['purchasesByMonth']),
+      map(response => response.data.purchasesByMonth),
       map(response => response.map((item: PurchaseResponse) => new Purchase(item))
       )
     );
@@ -121,7 +122,7 @@ export class PurchaseService {
   }
 
   public getPieChartData(data: any[]): any[] {
-    let pieChartData = [];
+    const pieChartData = [];
 
     data.forEach(elem => {
       pieChartData.push({

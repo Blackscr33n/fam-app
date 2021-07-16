@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 
 import { AccountService } from '../../_services/account.service';
 
-@Component({ 
-  templateUrl: 'layout.component.html',
-  styleUrls: ['layout.component.scss']
+@Component({
+    templateUrl: 'layout.component.html',
+    styleUrls: ['layout.component.scss']
 })
 export class LayoutComponent {
     constructor(

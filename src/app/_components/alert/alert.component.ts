@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Alert, AlertType } from '../../_models/alert';
 import { AlertService } from '../../_services/alert.service';
 
-@Component({ selector: 'alert', templateUrl: 'alert.component.html' })
+@Component({ selector: 'app-alert', templateUrl: 'alert.component.html' })
 export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';
     @Input() fade = true;
@@ -16,7 +16,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     constructor(private router: Router, private alertService: AlertService) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         // subscribe to new alert notifications
         this.alertSubscription = this.alertService.onAlert(this.id)
             .subscribe(alert => {
@@ -37,7 +37,7 @@ export class AlertComponent implements OnInit, OnDestroy {
                 if (alert.autoClose) {
                     setTimeout(() => this.removeAlert(alert), 3000);
                 }
-           });
+            });
 
         // clear alerts on location change
         this.routeSubscription = this.router.events.subscribe(event => {
@@ -47,15 +47,17 @@ export class AlertComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         // unsubscribe to avoid memory leaks
         this.alertSubscription.unsubscribe();
         this.routeSubscription.unsubscribe();
     }
 
-    removeAlert(alert: Alert) {
+    removeAlert(alert: Alert): void {
         // check if already removed to prevent error on auto close
-        if (!this.alerts.includes(alert)) return;
+        if (!this.alerts.includes(alert)) {
+            return;
+        }
 
         if (this.fade) {
             // fade out alert
@@ -71,17 +73,19 @@ export class AlertComponent implements OnInit, OnDestroy {
         }
     }
 
-    cssClass(alert: Alert) {
-        if (!alert) return null;
+    cssClass(alert: Alert): string {
+        if (!alert) {
+            return null;
+        }
 
         const classes = ['alert', 'alert-dismissable', 'mt-4', 'container'];
-                
+
         const alertTypeClass = {
             [AlertType.Success]: 'alert alert-success',
             [AlertType.Error]: 'alert alert-danger',
             [AlertType.Info]: 'alert alert-info',
             [AlertType.Warning]: 'alert alert-warning'
-        }
+        };
 
         classes.push(alertTypeClass[alert.type]);
 

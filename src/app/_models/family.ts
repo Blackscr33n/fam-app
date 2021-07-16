@@ -1,9 +1,9 @@
-import { User } from "./user";
+import { User } from './user';
 
 export interface FamilyResponse {
     id: string;
     name: string;
-    members: User[]
+    members: User[];
 }
 
 export class Family {
@@ -11,11 +11,9 @@ export class Family {
     name: string;
     members: User[];
 
-    constructor();
-    constructor(response: FamilyResponse)
     constructor(response?: FamilyResponse) {
-        this.id = response.id || '0';
-        this.name = response.name || '';
-        this.members = response.members || [];
+        this.id = response?.id || '0';
+        this.name = response?.name || '';
+        this.members = response?.members || [];
     }
 }

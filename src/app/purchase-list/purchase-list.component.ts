@@ -16,16 +16,13 @@ export class PurchaseListComponent implements OnInit {
 
   constructor(private purchaseService: PurchaseService) { }
 
-  async ngOnInit() {
+  ngOnInit(): void {
     this.purchaseService.getPurchasesByMonth(this.selectedDate).subscribe((data) => {
       this.purchases = data;
-      console.log(data);
-      
     });
-
   }
 
-  async onUpdateMonth() {
+  onUpdateMonth(): void {
     this.purchaseService.getPurchasesByMonth(this.selectedDate).subscribe((data) => {
       this.purchases = data;
     });
