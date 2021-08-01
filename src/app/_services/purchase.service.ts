@@ -42,7 +42,7 @@ export class PurchaseService {
     const dateString = selectedDate.format('YYYY-MM');
     const purchaseByMonthQuery = gql`
       query purchasesByMonth {
-        purchasesByMonth(purchaseMonth: '${dateString}'') {
+        purchasesByMonth(purchaseMonth: "${dateString}") {
           id
           title
           amount

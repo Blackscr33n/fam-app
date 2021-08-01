@@ -44,3 +44,12 @@ form {
 form>* {
   margin-top: 1rem;
 }
+
+mat-chip-list > .mat-chip-list-wrapper{
+  overflow-x: auto;
+  flex-wrap: nowrap;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

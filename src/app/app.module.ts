@@ -25,6 +25,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './_helpers/material.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MonthPickerComponent } from './_components/month-picker/month-picker.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AlertComponent,
     FamilyComponent,
     MembersComponent,
+    MonthPickerComponent
   ],
   imports: [
     BrowserModule,

@@ -38,7 +38,9 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges {
 
       this.purchaseService.getSummaryOfPurchasesByMonth(this.selectedDate).subscribe((summary) => {
         this.summary = summary;
-        this.pieChartData = this.purchaseService.getPieChartData(this.summary.userExpenses);
+        if (this.summary.userExpenses) {
+          this.pieChartData = this.purchaseService.getPieChartData(this.summary.userExpenses);
+        }
 
       });
 
@@ -47,7 +49,9 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges {
 
   async ngOnInit(): Promise<void> {
     this.summary = await this.purchaseService.getSummaryOfPurchasesByMonth(this.selectedDate);
-    this.pieChartData = this.purchaseService.getPieChartData(this.summary.userExpenses);
+    if (this.summary.userExpenses) {
+      this.pieChartData = this.purchaseService.getPieChartData(this.summary.userExpenses);
+    }
   }
 
   onSelect(data): void {

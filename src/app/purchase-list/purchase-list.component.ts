@@ -9,7 +9,7 @@ import * as moment from 'moment';
   styleUrls: ['./purchase-list.component.scss']
 })
 export class PurchaseListComponent implements OnInit {
-  displayedColumns: string[] = ['title', 'amount', 'date', 'purchaser'];
+  displayedColumns: string[] = ['date', 'title', 'purchaser', 'amount'];
   purchases: Purchase[] = [];
 
   selectedDate: moment.Moment = moment();
