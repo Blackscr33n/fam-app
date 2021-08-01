@@ -1,3 +1,4 @@
+import { YearPickerComponent } from './_components/year-picker/year-picker.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,7 +40,8 @@ import { MonthPickerComponent } from './_components/month-picker/month-picker.co
     AlertComponent,
     FamilyComponent,
     MembersComponent,
-    MonthPickerComponent
+    MonthPickerComponent,
+    YearPickerComponent
   ],
   imports: [
     BrowserModule,

@@ -14,22 +14,20 @@ import {
     DateAdapter,
     MAT_DATE_FORMATS,
     MAT_DATE_LOCALE,
-    MatDatepicker,
-  } from '@angular/material';
+  } from '@angular/material/core';
   import { MomentDateAdapter } from '@angular/material-moment-adapter';
   
-  import { MultiDatepickerComponent } from '../multidatepicker.component';
+  //import { MultiDatepickerComponent } from '../multidatepicker.component';
   
   // Depending on whether rollup is used, moment needs to be imported differently.
   // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
   // syntax. However, rollup creates a synthetic default module and we thus need to import it using
   // the `default as` syntax.
-  import * as _moment from 'moment';
+  import * as moment from 'moment';
   // tslint:disable-next-line:no-duplicate-imports
-  import { default as _rollupMoment, Moment } from 'moment';
-  
-  const moment = _rollupMoment || _moment;
-  
+  //import { default as _rollupMoment, Moment } from 'moment';
+import { MatDatepicker } from '@angular/material/datepicker';
+    
   export const YEAR_MODE_FORMATS = {
     parse: {
       dateInput: 'YYYY',
@@ -47,7 +45,7 @@ import {
     templateUrl: './year-picker.component.html',
     styleUrls: [],
     providers: [
-      { provide: MAT_DATE_LOCALE, useValue: 'pt' },
+      { provide: MAT_DATE_LOCALE, useValue: 'de' },
       {
         provide: DateAdapter,
         useClass: MomentDateAdapter,
@@ -69,7 +67,7 @@ import {
     /** Component label */
     @Input() label = '';
   
-    _max: Moment;
+    _max: moment.Moment;
     @Input()
     get max(): number | Date {
       return this._max ? this._max.year() : undefined;
@@ -82,7 +80,7 @@ import {
       }
     }
   
-    _min: Moment;
+    _min: moment.Moment;
     @Input()
     get min(): number | Date {
       return this._min ? this._min.year() : undefined;
@@ -97,7 +95,7 @@ import {
   
     @Input() touchUi = false;
   
-    @ViewChild(MatDatepicker) _picker: MatDatepicker<Moment>;
+    @ViewChild(MatDatepicker) _picker: MatDatepicker<moment.Moment>;
   
     _inputCtrl: FormControl = new FormControl();
   
@@ -108,12 +106,14 @@ import {
     onTouched = () => { };
   
     /** send the focus away from the input so it doesn't open again */
-    _takeFocusAway = (datepicker: MatDatepicker<Moment>) => { };
+    _takeFocusAway = (datepicker: MatDatepicker<moment.Moment>) => { };
   
-    constructor(private parent: MultiDatepickerComponent) { }
+    constructor() {
+      this.max = moment().year();
+    }// private parent: MultiDatepickerComponent
   
     ngAfterViewInit() {
-      this._takeFocusAway = this.parent._takeFocusAway;
+      //this._takeFocusAway = this.parent._takeFocusAway;
     }
   
     writeValue(date: Date): void {
@@ -142,7 +142,7 @@ import {
       isDisabled ? this._inputCtrl.disable() : this._inputCtrl.enable();
     }
   
-    _yearSelectedHandler(chosenDate: Moment, datepicker: MatDatepicker<Moment>) {
+    _yearSelectedHandler(chosenDate: moment.Moment, datepicker: MatDatepicker<moment.Moment>) {
       datepicker.close();
   
       if (!this._isYearEnabled(chosenDate.year())) {
@@ -156,7 +156,7 @@ import {
       this.onTouched();
     }
   
-    _openDatepickerOnClick(datepicker: MatDatepicker<Moment>) {
+    _openDatepickerOnClick(datepicker: MatDatepicker<moment.Moment>) {
       if (!datepicker.opened) {
         datepicker.open();
       }

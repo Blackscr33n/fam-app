@@ -28,4 +28,9 @@ export class PurchaseListComponent implements OnInit {
     });
   }
 
+  onUpdateYear(year: Event): void {
+    console.log(year);
+    
+  }
+
 }
