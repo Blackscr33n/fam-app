@@ -8,10 +8,10 @@ import * as moment from 'moment';
   templateUrl: './month-picker.component.html',
   styleUrls: ['./month-picker.component.scss']
 })
-export class MonthPickerComponent implements AfterViewInit {
+export class MonthPickerComponent {
 
   @Output() selectedMonth: EventEmitter<number> = new EventEmitter<number>();
-  public monthControl = new FormControl({ label: moment().format('MMM'), value: moment().month() });
+  public monthControl = new FormControl(moment().month());
 
   public months: any[] = [
     { label: "Jan.", value: 0 },
@@ -34,13 +34,10 @@ export class MonthPickerComponent implements AfterViewInit {
     //this.monthControl.setValue();
   }
 
-  ngAfterViewInit(): void {
-    this.chipList.writeValue('initiated');
-  }
-
   handleClick(month: any) {
-    this.monthControl.setValue(month);
-    this.selectedMonth.emit(month);
+    this.monthControl.setValue(month.value);
+    this.selectedMonth.emit(month.value);
+
   }
 
 }
