@@ -27,6 +27,7 @@ import { environment } from '../environments/environment';
 import { MaterialModule } from './_helpers/material.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MonthPickerComponent } from './_components/month-picker/month-picker.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MonthPickerComponent } from './_components/month-picker/month-picker.co
     ReactiveFormsModule,
     GraphQLModule,
     NgxChartsModule,
+    TranslateModule.forRoot(), // https://github.com/ngx-translate/core
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
