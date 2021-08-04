@@ -40,13 +40,21 @@ export class FamilyService {
     }
 
     addFamily(family: Family): Observable<Family> {
+        console.log(family.members);
+        
+        if(family.members.length == 0) return null;
+        let memberIds = [];
+        family.members.forEach(member => {
+            memberIds.push(member.id);
+        })
         const addFamilyCred = gql`
             mutation addFamily
             {
                 addFamily(
-                    name: '${family.name}',
-                    members: '${family.members}'
+                    name: "${family.name}",
+                    members: "${memberIds}"
                     )
+                    {name, members { firstname, lastname}}
             }
         `;
 

@@ -13,7 +13,7 @@ export class MembersComponent implements OnInit {
   constructor(private familyService: FamilyService) { }
 
   ngOnInit(): void {
-    this.familyMembers = this.familyService.familyValue.members;
+    this.familyMembers = []; // this.familyService.familyValue.members;
   }
 
 }

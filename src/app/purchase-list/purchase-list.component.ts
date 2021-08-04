@@ -1,10 +1,12 @@
+import { AccountService } from './../_services/account.service';
+import { FamilyService } from './../_services/family.service';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { PurchaseService } from '../_services/purchase.service';
 import { Purchase } from '../_models/purchase';
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { throwServerError } from '@apollo/client/core';
+import { Family, FamilyResponse } from '../_models';
 
 @Component({
   selector: 'app-purchase-list',
@@ -12,7 +14,7 @@ import { throwServerError } from '@apollo/client/core';
   styleUrls: ['./purchase-list.component.scss']
 })
 export class PurchaseListComponent implements OnInit, AfterViewInit, OnDestroy {
-  displayedColumns: string[] = ['date', 'title', 'purchaser', 'amount'];
+  displayedColumns: string[] = ['date', 'title', 'category', 'purchaser', 'amount'];
   purchases: Purchase[] = [];
 
   selectedDate: moment.Moment = moment();
@@ -20,7 +22,11 @@ export class PurchaseListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private purchaseService: PurchaseService) {
+  constructor(
+    private purchaseService: PurchaseService,
+    private familyService: FamilyService,
+    private accountService: AccountService
+  ) {
     this.yearPickerControl.setValue(this.selectedDate.toDate());
   }
 
@@ -51,6 +57,19 @@ export class PurchaseListComponent implements OnInit, AfterViewInit, OnDestroy {
   handleSelectedMonth(month: any): void {
     this.selectedDate.month(month.value);
     this.onUpdateDate();
+  }
+
+  addFamily(): void {
+    const famRes: FamilyResponse = {
+      id: null,
+      name: 'Miehl',
+      members: [
+        this.accountService.userValue
+      ]
+    };
+    const family = new Family(famRes);
+    this.familyService.addFamily(family).subscribe(data => console.log(data));
+    
   }
 
 }

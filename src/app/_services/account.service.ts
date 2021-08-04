@@ -25,6 +25,7 @@ export class AccountService {
     private GET_USER = gql`
         query user {
             user {
+                id
                 email
                 firstname
                 lastname
