@@ -1,8 +1,8 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { User } from '../_models';
 import { Family, FamilyResponse } from '../_models/family';
 
@@ -19,8 +19,9 @@ export class FamilyService {
         const getFamily = gql`
         query family {
             family {
+                id
                 name
-                members {id, firstname,lastname}
+                members {id, firstname, lastname}
             }
         }
         `;
@@ -30,8 +31,11 @@ export class FamilyService {
                 headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             },
         }).valueChanges.pipe(
-            map(response => response.data.family),
-            map((response: FamilyResponse) => new Family(response))
+            map( (response: any) => response.data.family),
+            map((response: FamilyResponse) => new Family(response)),
+            catchError(err => {
+                return throwError(err);
+            })
         ).subscribe((family: Family) => this.family = family);
     }
 

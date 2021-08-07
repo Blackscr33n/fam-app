@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'add-purchase', component: AddPurchaseComponent, canActivate: [AuthGuard]},
   { path: 'purchase-list', component: PurchaseListComponent, canActivate: [AuthGuard]},
   { path: 'family', component: FamilyComponent, canActivate: [AuthGuard]},
-  { path: '', redirectTo: '/todos', pathMatch: 'full' },
+  { path: '', redirectTo: '/purchase-list', pathMatch: 'full' },
 ];
 
 @NgModule({
