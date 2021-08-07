@@ -13,7 +13,7 @@ import { Family, FamilyResponse } from '../_models';
   templateUrl: './purchase-list.component.html',
   styleUrls: ['./purchase-list.component.scss']
 })
-export class PurchaseListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PurchaseListComponent implements AfterViewInit, OnDestroy {
   displayedColumns: string[] = ['date', 'title', 'category', 'purchaser', 'amount'];
   purchases: Purchase[] = [];
 
@@ -37,39 +37,18 @@ export class PurchaseListComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.subscriptions.push(this.yearPickerControl.valueChanges.subscribe(value => {
       this.selectedDate.year(moment(value).year());
-      this.onUpdateDate();
+      this.getPurchases();
     }
     ))
   }
 
-  ngOnInit(): void {
-    this.purchaseService.getPurchasesByMonth(this.selectedDate).subscribe((data) => {
-      this.purchases = data;
-    });
-  }
-
-  onUpdateDate(): void {
-    this.purchaseService.getPurchasesByMonth(this.selectedDate).subscribe((data) => {
-      this.purchases = data;
-    });
+  getPurchases(): void {
+    this.purchaseService.getPurchasesByMonth(this.selectedDate).subscribe((data) => this.purchases = data);
   }
 
   handleSelectedMonth(month: any): void {
-    this.selectedDate.month(month.value);
-    this.onUpdateDate();
-  }
-
-  addFamily(): void {
-    const famRes: FamilyResponse = {
-      id: null,
-      name: 'Miehl',
-      members: [
-        this.accountService.userValue
-      ]
-    };
-    const family = new Family(famRes);
-    this.familyService.addFamily(family).subscribe(data => console.log(data));
-    
+    this.selectedDate.month(month);
+    this.getPurchases();
   }
 
 }
