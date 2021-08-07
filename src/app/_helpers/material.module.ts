@@ -15,6 +15,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const MY_FORMATS = {
   parse: {
@@ -45,7 +46,8 @@ export const MY_FORMATS = {
     MatAutocompleteModule,
     MatGridListModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },

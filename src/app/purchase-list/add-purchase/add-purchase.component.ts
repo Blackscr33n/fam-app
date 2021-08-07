@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Purchase } from '../../_models/purchase';
 import { PurchaseService } from '../../_services/purchase.service';
 import { Router } from '@angular/router';
 import { FamilyService } from 'src/app/_services/family.service';
 import { Family } from 'src/app/_models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-purchase',
   templateUrl: './add-purchase.component.html',
   styleUrls: ['./add-purchase.component.scss']
 })
-export class AddPurchaseComponent implements OnInit {
+export class AddPurchaseComponent implements OnInit, OnDestroy {
 
   purchase: Purchase;
   family: Family;
-  loading: boolean;
+  loading: boolean = true;
+  subscriptions: Subscription[]= [];
 
   constructor(
     private purchaseService: PurchaseService,
@@ -24,18 +26,25 @@ export class AddPurchaseComponent implements OnInit {
     this.purchase = new Purchase();
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.loading = true;
-    await this.familyService.loadFamily();
-    this.family = this.familyService.familyValue;
+    this.familyService.loadFamily().subscribe(family => {
+      this.family = family;
+      this.loading = false;
+    });
+  }
 
-    this.loading = false;
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   savePurchase(): void {
-    this.purchaseService.addPurchase(this.purchase);
-    this.purchase = new Purchase();
-    this.goToPurchaseList();
+    this.loading = true;
+    this.purchaseService.addPurchase(this.purchase).subscribe(purchase => {
+      this.purchase = new Purchase();
+      this.loading = false;
+      this.goToPurchaseList();
+    });
   }
 
   cancel(): void {
