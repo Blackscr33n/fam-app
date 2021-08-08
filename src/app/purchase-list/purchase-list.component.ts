@@ -13,21 +13,23 @@ import { Family, FamilyResponse } from '../_models';
   templateUrl: './purchase-list.component.html',
   styleUrls: ['./purchase-list.component.scss']
 })
-export class PurchaseListComponent implements AfterViewInit, OnDestroy {
-  displayedColumns: string[] = ['date', 'title', 'category', 'purchaser', 'amount'];
-  purchases: Purchase[] = [];
+export class PurchaseListComponent implements AfterViewInit, OnDestroy, OnInit {
+  public displayedColumns: string[] = ['date', 'title', 'category', 'purchaser', 'amount'];
+  public purchases: Purchase[] = [];
+  public selectedDate: moment.Moment = moment();
+  public yearPickerControl: FormControl = new FormControl();
+  public isLoading = true;
 
-  selectedDate: moment.Moment = moment();
-  yearPickerControl: FormControl = new FormControl();
-
-  subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(
-    private purchaseService: PurchaseService,
-    private familyService: FamilyService,
-    private accountService: AccountService
+    private purchaseService: PurchaseService
   ) {
     this.yearPickerControl.setValue(this.selectedDate.toDate());
+  }
+
+  ngOnInit(): void {
+    this.getPurchases();
   }
 
   ngOnDestroy(): void {
@@ -39,11 +41,15 @@ export class PurchaseListComponent implements AfterViewInit, OnDestroy {
       this.selectedDate.year(moment(value).year());
       this.getPurchases();
     }
-    ))
+    ));
   }
 
   getPurchases(): void {
-    this.purchaseService.getPurchasesByMonth(this.selectedDate).subscribe((data) => this.purchases = data);
+    this.isLoading = true;
+    this.purchaseService.getPurchasesByMonth(this.selectedDate).subscribe((data) => {
+      this.purchases = data;
+      this.isLoading = false;
+    });
   }
 
   handleSelectedMonth(month: any): void {

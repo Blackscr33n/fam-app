@@ -22,18 +22,19 @@ export class PurchaseService {
           amount: ${purchase.amount}
           purchaseDate: "${moment(purchase.purchaseDate).format('YYYY-MM-DD')}"
           purchaseMonth: "${moment(purchase.purchaseDate).format('YYYY-MM')}"
+          category: "${purchase.category}"
           purchaser: "${purchase.purchaser}"
         )
         {
-          id, amount, title, purchaseDate, purchaser {
-          email}, family, {name}}
+          id, amount, title, purchaseDate, category, purchaser {
+          id, firstname, lastname, email}, family, {id,name}}
       }
     `;
     return this.apollo.mutate({
       mutation: addPurchaseMutation
     }).pipe(
-      map((response: any) => response.data.purchase),
-      map(response => response.map((item: PurchaseResponse) => new Purchase(item)))
+      map((response: any) => response.data.addPurchase),
+      map(response => new Purchase(response))
     );
 
   }
@@ -48,7 +49,9 @@ export class PurchaseService {
           amount
           purchaseDate
           purchaseMonth
+          category
           purchaser {
+            id
             firstname
             lastname
           }

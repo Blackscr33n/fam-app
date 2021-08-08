@@ -9,11 +9,13 @@
     ></app-year-picker>
 
     <app-month-picker (selectedMonth)="handleSelectedMonth($event)"></app-month-picker>
-
+    <div *ngIf="isLoading" class="spinner-container">
+        <mat-spinner></mat-spinner>
+    </div>
     <table
         mat-table
         [dataSource]="purchases"
-        *ngIf="purchases.length != 0"
+        *ngIf="purchases.length != 0 && isLoading === false"
     >
 
         <!-- Date Column -->
@@ -114,11 +116,7 @@
         </tbody>
     </table>
 
-
-
-
-
-    <div *ngIf="purchases.length == 0">
+    <div *ngIf="purchases.length === 0 && isLoading === false">
         <span>No purchases available</span>
     </div>
     <mat-divider></mat-divider>

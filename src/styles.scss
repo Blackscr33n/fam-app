@@ -53,3 +53,13 @@ mat-chip-list > .mat-chip-list-wrapper{
     display: none;
   }
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20px);
+  mat-spinner {
+      padding: 12px;
+  }
+}

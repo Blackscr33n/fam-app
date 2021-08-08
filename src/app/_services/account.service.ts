@@ -80,7 +80,7 @@ export class AccountService {
                 email: "${user.username}"
                 password: "${user.password}"
             )
-            {email,firstname,lastname}
+            {id,email,firstname,lastname}
         }
         `;
 
