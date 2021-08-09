@@ -2,18 +2,18 @@ import * as moment from 'moment';
 import { User } from './user';
 
 export enum Category {
-    None = "",
-    Lebensmittel = "Lebensmittel",
-    Baby = "Baby",
-    Wohnung = "Wohnung"
+    None = '',
+    Lebensmittel = 'Lebensmittel',
+    Baby = 'Baby',
+    Wohnung = 'Wohnung'
 }
 
 export const CategoryMapping: Record<Category, string> = {
-    [Category.None]: "",
-    [Category.Baby]: "Baby",
-    [Category.Lebensmittel]: "Lebensmittel",
-    [Category.Wohnung]: "Wohnung"
-}
+    [Category.None]: '',
+    [Category.Baby]: 'Baby',
+    [Category.Lebensmittel]: 'Lebensmittel',
+    [Category.Wohnung]: 'Wohnung'
+};
 
 export interface PurchaseResponse {
     id: string;

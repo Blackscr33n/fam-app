@@ -28,6 +28,7 @@ import { MaterialModule } from './_helpers/material.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MonthPickerComponent } from './_components/month-picker/month-picker.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { DashboardComponent } from './purchase-list/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FamilyComponent,
     MembersComponent,
     MonthPickerComponent,
-    YearPickerComponent
+    YearPickerComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -17,8 +17,8 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
   public purchase: Purchase;
   public family: Family;
   public categories: any = Object.values(CategoryMapping);
-  public loading: boolean = true;
-  public subscriptions: Subscription[]= [];
+  public loading = true;
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private purchaseService: PurchaseService,
@@ -27,7 +27,7 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
   ) {
     this.purchase = new Purchase();
     console.log(this.categories);
-    
+
   }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
   savePurchase(): void {
     this.loading = true;
     console.log(this.purchase);
-    
+
     this.purchaseService.addPurchase(this.purchase).subscribe(purchase => {
       this.purchase = new Purchase();
       this.loading = false;
