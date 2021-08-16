@@ -1,4 +1,3 @@
-import { YearPickerComponent } from './_components/year-picker/year-picker.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,9 +13,6 @@ import { AppComponent } from './app.component';
 import { TodolistComponent } from './todolist/todolist.component';
 import { AddTodoComponent } from './todolist/add-todo/add-todo.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PurchaseListComponent } from './purchase-list/purchase-list.component';
-import { AddPurchaseComponent } from './purchase-list/add-purchase/add-purchase.component';
-import { PurchaseSummaryComponent } from './purchase-list/purchase-summary/purchase-summary.component';
 import { AlertComponent } from './_components/alert/alert.component';
 import { FamilyComponent } from './family/family.component';
 import { MembersComponent } from './family/members/members.component';
@@ -25,10 +21,8 @@ import { GraphQLModule } from './graphql.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './_helpers/material.module';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { MonthPickerComponent } from './_components/month-picker/month-picker.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { DashboardComponent } from './purchase-list/dashboard/dashboard.component';
+import { PurchaseModule } from './purchase/purchase.module';
 
 @NgModule({
   declarations: [
@@ -36,26 +30,20 @@ import { DashboardComponent } from './purchase-list/dashboard/dashboard.componen
     TodolistComponent,
     AddTodoComponent,
     NavbarComponent,
-    PurchaseListComponent,
-    AddPurchaseComponent,
-    PurchaseSummaryComponent,
     AlertComponent,
     FamilyComponent,
-    MembersComponent,
-    MonthPickerComponent,
-    YearPickerComponent,
-    DashboardComponent
+    MembersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    PurchaseModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
     ReactiveFormsModule,
     GraphQLModule,
-    NgxChartsModule,
     TranslateModule.forRoot(), // https://github.com/ngx-translate/core
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

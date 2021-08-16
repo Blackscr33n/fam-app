@@ -1,4 +1,4 @@
-import { CategoryMapping } from './../../_models/purchase';
+import { CategoryMapping } from '../../_models/purchase';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category, Purchase } from '../../_models/purchase';
 import { PurchaseService } from '../../_services/purchase.service';
@@ -58,7 +58,7 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
   }
 
   goToPurchaseList(): void {
-    this.router.navigate(['purchase-list']);
+    this.router.navigate(['purchase']);
   }
 
 }

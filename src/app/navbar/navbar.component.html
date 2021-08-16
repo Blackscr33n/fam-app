@@ -1,27 +1,68 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button  aria-label="icon-button with menu icon" (click)="toggleNav()">
+    <button
+        mat-icon-button
+        aria-label="icon-button with menu icon"
+        (click)="toggleNav()"
+    >
         <mat-icon>menu</mat-icon>
-      </button>
-      <span>Fam App</span>
+    </button>
+    <span>Fam App</span>
 </mat-toolbar>
 
+
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="over" [(opened)]="opened" >
+    <mat-sidenav
+        #sidenav
+        mode="over"
+        [(opened)]="opened"
+    >
         <mat-nav-list *ngIf="isLoggedIn">
-            <!--a mat-list-item (click)="closeNav()" [routerLink]="'/todos'"> Todos </a>
-            <mat-divider [inset]="false" ></mat-divider-->
-            <a mat-list-item (click)="closeNav()" [routerLink]="'/purchase-list'"> Purchases </a>
-            <a mat-list-item (click)="closeNav()" [routerLink]="'/family'"> Family </a>
-          </mat-nav-list>
-          <mat-divider [inset]="false" ></mat-divider>
-          <mat-nav-list>
-            <a mat-list-item *ngIf="!isLoggedIn" (click)="closeNav()" [routerLink]="'/account/login'"> Login </a>
-            <a mat-list-item *ngIf="isLoggedIn" (click)="logout()"> Logout </a>
-          </mat-nav-list>
+            <!-- a mat-list-item (click)="closeNav()" [routerLink]="'/todos'"> Todos </a>
+            <mat-divider [inset]="false" ></mat-divider -->
+            <a
+                mat-list-item
+                (click)="closeNav()"
+                [routerLink]="'/purchase/dashboard'"
+            >
+                Dashboard
+            </a>
+            <a
+                mat-list-item
+                (click)="closeNav()"
+                [routerLink]="'/purchase'"
+            >
+                Purchases
+            </a>
+            <a
+                mat-list-item
+                (click)="closeNav()"
+                [routerLink]="'/family'"
+            >
+                Family
+            </a>
+        </mat-nav-list>
+        <mat-divider [inset]="false"></mat-divider>
+        <mat-nav-list>
+            <a
+                mat-list-item
+                *ngIf="!isLoggedIn"
+                (click)="closeNav()"
+                [routerLink]="'/account/login'"
+            >
+                Login
+            </a>
+            <a
+                mat-list-item
+                *ngIf="isLoggedIn"
+                (click)="logout()"
+            >
+                Logout
+            </a>
+        </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
         <div style="height: 88vh;">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
-  </mat-sidenav-container>
+</mat-sidenav-container>

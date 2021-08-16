@@ -1,12 +1,9 @@
-import { AccountService } from './../_services/account.service';
-import { FamilyService } from './../_services/family.service';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { PurchaseService } from '../_services/purchase.service';
-import { Purchase } from '../_models/purchase';
+import { PurchaseService } from '../../_services/purchase.service';
+import { Purchase } from '../../_models/purchase';
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Family, FamilyResponse } from '../_models';
 
 @Component({
   selector: 'app-purchase-list',
