@@ -1,0 +1,24 @@
+.add-purchase-btn {
+    position: absolute;
+    right: 5vh;
+    bottom: 2.5vh;
+}
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    width: 25%;
+}
+
+mat-divider {
+    margin: 2vh auto;
+}
+
+td.mat-cell {
+    padding-right: 1rem;
+}
+
+app-month-picker {
+    margin-bottom: 2rem;
+}
+
+div.spinner-container {
+    height: auto;
+}

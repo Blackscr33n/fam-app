@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AccountService } from '../../_services/account.service';
+import { AccountService } from 'src/app/_services/account.service';
 
-@Component({ 
-  templateUrl: 'layout.component.html',
-  styleUrls: ['layout.component.scss']
+@Component({
+    templateUrl: 'layout.component.html',
+    styleUrls: ['layout.component.scss']
 })
 export class LayoutComponent {
     constructor(

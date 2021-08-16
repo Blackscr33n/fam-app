@@ -1,0 +1,136 @@
+<!-- Add Expansion Panel for every month -->
+<div class="container">
+    <h1>Purchases</h1>
+
+    <app-year-picker
+        [formControl]="yearPickerControl"
+        [touchUi]="true"
+        label="Jahr"
+    ></app-year-picker>
+
+    <app-month-picker (selectedMonth)="handleSelectedMonth($event)"></app-month-picker>
+    <div *ngIf="isLoading" class="spinner-container">
+        <mat-spinner></mat-spinner>
+    </div>
+    <table
+        mat-table
+        [dataSource]="purchases"
+        *ngIf="purchases.length != 0 && isLoading === false"
+    >
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+            >
+                DATUM
+            </th>
+            <td
+                mat-cell
+                *matCellDef="let element"
+            >
+                {{element.purchaseDate | date: 'mediumDate' }}
+            </td>
+        </ng-container>
+
+
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+            >
+                TITEL
+            </th>
+            <td
+                mat-cell
+                *matCellDef="let element"
+            >
+                {{element.title}}
+            </td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="category">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+            >
+                KATEGORIE
+            </th>
+            <td
+                mat-cell
+                *matCellDef="let element"
+            >
+                {{element.category}}
+            </td>
+        </ng-container>
+
+        <!-- Purchaser Column -->
+        <ng-container matColumnDef="purchaser">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+            >
+                KÄUFER
+            </th>
+            <td
+                mat-cell
+                *matCellDef="let element"
+            >
+                {{element.purchaser.firstname + ' ' + element.purchaser.lastname}}
+            </td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="amount">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+            >
+                BETRAG
+            </th>
+            <td
+                mat-cell
+                *matCellDef="let element"
+                style="color: green"
+            >
+                {{element.amount | currency : 'EUR'}}
+            </td>
+        </ng-container>
+
+
+
+
+        <tbody>
+            <tr
+                mat-header-row
+                *matHeaderRowDef="displayedColumns"
+            ></tr>
+            <tr
+                mat-row
+                *matRowDef="let row; columns: displayedColumns;"
+            ></tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="purchases.length === 0 && isLoading === false">
+        <span>No purchases available</span>
+    </div>
+    <mat-divider></mat-divider>
+    <app-purchase-summary
+        *ngIf="purchases.length != 0"
+        [selectedDate]="selectedDate"
+    ></app-purchase-summary>
+</div>
+<button
+    mat-fab
+    color="primary"
+    [routerLink]="'/purchase/add'"
+    class="add-purchase-btn"
+    aria-label="icon button with a add icon"
+>
+    <mat-icon>add</mat-icon>
+</button>

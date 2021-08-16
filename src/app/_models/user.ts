@@ -1,12 +1,24 @@
-export class User {
-    constructor(
-        public id: string,
-        public username: string,
-        public firstname: string,
-        public lastname: string,
-        public password: string,
-        public token: string
-        ) {
+export interface UserResponse {
+    id: string;
+    username: string;
+    firstname: string;
+    lastname: string;
+    token: string;
+}
 
+export class User {
+    id: string;
+    username: string;
+    firstname: string;
+    lastname: string;
+    token: string;
+    password: string;
+
+    constructor(response: UserResponse) {
+        this.id = response.id;
+        this.username = response.username;
+        this.firstname = response.firstname;
+        this.lastname = response.lastname;
+        this.token = response.token;
     }
 }

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +14,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const MY_FORMATS = {
   parse: {
@@ -44,7 +45,9 @@ export const MY_FORMATS = {
     MatMomentDateModule,
     MatAutocompleteModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatChipsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },

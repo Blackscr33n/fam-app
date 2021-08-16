@@ -13,17 +13,18 @@ import { AccountService } from '../_services/account.service';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error) => {
-        if(error.status == 401) {
+        if (error.status === 401) {
           this.accountService.logout();
         }
         return throwError(error);
       })
     );
   }
+
 
 }

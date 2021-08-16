@@ -8,27 +8,23 @@ import { Router } from '@angular/router';
   templateUrl: './add-todo.component.html',
   styleUrls: ['./add-todo.component.scss']
 })
-export class AddTodoComponent implements OnInit {
+export class AddTodoComponent {
 
   todo: Todo;
-  showNewTodo: Boolean = false;
+  showNewTodo = false;
 
   constructor(private todoService: TodoService, private router: Router) {
     this.todo = this.todoService.getNewTodo();
   }
 
-  ngOnInit(): void {
-    
-  }
-
-  saveTodo() {
+  saveTodo(): void {
     this.todoService.addTodo(this.todo);
     this.showNewTodo = false;
     this.todo = this.todoService.getNewTodo();
     this.router.navigate(['todos']);
   }
 
-  cancel() {
+  cancel(): void {
     this.router.navigate(['todos']);
   }
 

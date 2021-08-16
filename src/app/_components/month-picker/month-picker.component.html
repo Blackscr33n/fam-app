@@ -1,0 +1,5 @@
+<mat-chip-list #chipList aria-label="Month selection" selectable="true" [formControl]="monthControl">
+    <mat-chip *ngFor="let month of months" (click)="handleClick(month)" [selected]="month == monthControl.value" [value]="month.value">
+        {{month.label}}
+    </mat-chip>
+</mat-chip-list>

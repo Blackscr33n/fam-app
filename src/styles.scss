@@ -16,7 +16,7 @@ body {
   margin-right: 5vh;
   margin-top: 2vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -43,4 +43,23 @@ form {
 
 form>* {
   margin-top: 1rem;
+}
+
+mat-chip-list > .mat-chip-list-wrapper{
+  overflow-x: auto;
+  flex-wrap: nowrap;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20px);
+  mat-spinner {
+      padding: 12px;
+  }
 }

@@ -1,10 +1,19 @@
-import { User } from "./user";
+import { User } from './user';
+
+export interface FamilyResponse {
+    id: string;
+    name: string;
+    members: User[];
+}
 
 export class Family {
-    constructor(
-        public id: string,
-        public name: string,
-        public members: User[]
-    ){}
+    id: string;
+    name: string;
+    members: User[];
 
+    constructor(response?: FamilyResponse) {
+        this.id = response?.id || '0';
+        this.name = response?.name || '';
+        this.members = response?.members || [];
+    }
 }

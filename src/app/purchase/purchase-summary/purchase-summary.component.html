@@ -1,7 +1,5 @@
 <div *ngIf="summary">
-    <!--p *ngFor="let userExpense of summary.userExpenses">
-        {{userExpense.purchaser.firstname + ' ' + userExpense.purchaser.lastname }}: {{userExpense.amount | currency : 'EUR'}}
-    </p-->
+    
     <p *ngFor="let owe of summary.owes">
         {{owe.debtor.firstname + ' ' + owe.debtor.lastname}} 
         owes {{owe.creditor.firstname + ' ' + owe.creditor.lastname}}

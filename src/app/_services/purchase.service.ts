@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Purchase } from '../_models/purchase';
+import { Purchase, PurchaseResponse } from '../_models/purchase';
 import { Apollo, gql } from 'apollo-angular';
 import { HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,8 @@ export class PurchaseService {
 
   constructor(private apollo: Apollo) { }
 
-  purchasesByMonth: any[] = [];
+  public addPurchase(purchase: Purchase): Observable<Purchase> {
 
-  async addPurchase(purchase: Purchase) {
-    
     const addPurchaseMutation = gql`
       mutation addPurchase {
         addPurchase(
@@ -22,68 +22,67 @@ export class PurchaseService {
           amount: ${purchase.amount}
           purchaseDate: "${moment(purchase.purchaseDate).format('YYYY-MM-DD')}"
           purchaseMonth: "${moment(purchase.purchaseDate).format('YYYY-MM')}"
+          category: "${purchase.category}"
           purchaser: "${purchase.purchaser}"
         )
         {
-          id, amount, title, purchaseDate, purchaser {
-          email}, family, {name}}
+          id, amount, title, purchaseDate, category, purchaser {
+          id, firstname, lastname, email}, family, {id,name}}
       }
     `;
-    var res = await this.apollo.mutate({
-            mutation: addPurchaseMutation
-        }).toPromise();
-        
-        return res.data['purchase'];
-    
+    return this.apollo.mutate({
+      mutation: addPurchaseMutation
+    }).pipe(
+      map((response: any) => response.data.addPurchase),
+      map(response => new Purchase(response))
+    );
+
   }
 
-  getPurchases(): any {
-  }
-
-  async getPurchasesByMonth(selectedDate: moment.Moment): Promise<Purchase[]> {
-    const dateString = selectedDate.format("YYYY-MM");
+  public getPurchasesByMonth(selectedDate: moment.Moment): Observable<Purchase[]> {
+    const dateString = selectedDate.format('YYYY-MM');
     const purchaseByMonthQuery = gql`
       query purchasesByMonth {
         purchasesByMonth(purchaseMonth: "${dateString}") {
+          id
           title
           amount
           purchaseDate
           purchaseMonth
+          category
           purchaser {
+            id
             firstname
             lastname
           }
         }
       }
-    `
-    const res = await this.apollo.watchQuery<any>({
-            query: purchaseByMonthQuery,
-            context: {
-                headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
-            },
-            fetchPolicy: 'network-only'
-        }).result();
-    this.purchasesByMonth = res.data['purchasesByMonth'];
-    
+    `;
 
-    return await res.data['purchasesByMonth'] as Purchase[]; 
+    return this.apollo.watchQuery<any>({
+      query: purchaseByMonthQuery,
+      context: {
+        headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+      },
+      fetchPolicy: 'network-only'
+    }).valueChanges.pipe(
+      map(response => response.data.purchasesByMonth),
+      map(response => response.map((item: PurchaseResponse) => new Purchase(item)
+      ))
+    );
+
   }
 
-  getNewPurchase(): Purchase {
-    return {id: 0 , title: '', purchaser: '', purchaseDate: moment().toDate(), amount: 0.0 }
-  }
+  public getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): Observable<Purchase[]> {
 
-  
-  async getSummaryOfPurchasesByMonth(selectedDate: moment.Moment): Promise<any> {
-    
-    const dateString = selectedDate.format("YYYY-MM");
+    const dateString = selectedDate.format('YYYY-MM');
     const monthlyExpenses = gql`
       query calculateMonthlyExpenses {
         calculateMonthlyExpenses(purchaseMonth: "${dateString}")
         {
           month
           totalExpenses
-          userExpenses 
+          userExpenses
           {
             purchaser {
               firstname
@@ -109,21 +108,24 @@ export class PurchaseService {
           }
         }
       }
-    `
-    const res = await this.apollo.watchQuery<any>({
+    `;
+
+    return this.apollo.watchQuery<any>({
       query: monthlyExpenses,
       context: {
-          headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+        headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
       },
       fetchPolicy: 'network-only'
-    }).result();
-
-    return await res.data['calculateMonthlyExpenses']; 
+    }).valueChanges.pipe(
+      map(response => response.data.purchasesByMonth),
+      map(response => response.map((item: PurchaseResponse) => new Purchase(item))
+      )
+    );
 
   }
 
-  getPieChartData(data: any[]) {
-    let pieChartData = [];
+  public getPieChartData(data: any[]): any[] {
+    const pieChartData = [];
 
     data.forEach(elem => {
       pieChartData.push({
