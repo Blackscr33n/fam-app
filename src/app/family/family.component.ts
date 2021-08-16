@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../_services/account.service';
 import { Family, User } from '../_models';
 import { FamilyService } from '../_services/family.service';
 import { FormControl } from '@angular/forms';
@@ -17,13 +16,10 @@ export class FamilyComponent implements OnInit {
   options: User[] = [];
   filteredOptions: Observable<User[]>;
 
-  constructor(private accountService: AccountService, private familyService: FamilyService) { }
+  constructor(private familyService: FamilyService) { }
 
   ngOnInit(): void {
-    this.accountService.getAll().subscribe((users) => {
-      
-      this.options = users;
-    });
+
     this.family = this.familyService.familyValue;
 
     this.filteredOptions = this.userControl.valueChanges
@@ -34,7 +30,7 @@ export class FamilyComponent implements OnInit {
       );
   }
 
-  displayFn(user: User): string {
+  public displayFn(user: User): string {
     return user && user.username ? user.username : '';
   }
 
@@ -44,9 +40,8 @@ export class FamilyComponent implements OnInit {
     return this.options.filter(option => option.username.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  addToFamily() {
+  public addToFamily(): void {
     this.familyService.addFamilyMember(this.userControl.value);
-    
   }
 
 }

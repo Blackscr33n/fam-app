@@ -12,12 +12,12 @@ export class TodoService {
   currentId = 1;
 
   todos: Todo[] = [
-    {id: 0, title: 'first todo', dueDate: moment().toDate(), isDone: false }
+    { id: 0, title: 'first todo', dueDate: moment().toDate(), isDone: false }
   ];
 
-  addTodo(todo: Todo) {
+  addTodo(todo: Todo): void {
     this.todos.push(todo);
-    this.currentId ++;
+    this.currentId++;
   }
 
   getTodos(): Todo[] {
@@ -25,7 +25,7 @@ export class TodoService {
   }
 
   getNewTodo(): Todo {
-    return {id:this.currentId , title: '', dueDate: moment().toDate(), isDone: false }
+    return { id: this.currentId, title: '', dueDate: moment().toDate(), isDone: false };
   }
 
 }

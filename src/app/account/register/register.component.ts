@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AccountService } from '../../_services/account.service';
 import { AlertService } from '../../_services/alert.service';
@@ -20,7 +19,7 @@ export class RegisterComponent implements OnInit {
         private alertService: AlertService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.form = this.formBuilder.group({
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
@@ -30,9 +29,9 @@ export class RegisterComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.form.controls; }
+    get f(): { [key: string]: AbstractControl; } { return this.form.controls; }
 
-    async onSubmit() {
+    async onSubmit(): Promise<void> {
         this.submitted = true;
 
         // reset alerts on submit
@@ -44,15 +43,14 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        var user = await this.accountService.register(this.form.value).catch((error) => {
+        const user = await this.accountService.register(this.form.value).catch((error) => {
             this.alertService.error(error);
             this.loading = false;
         });
 
-        if(user) {
+        if (user) {
             this.alertService.success('Registration successful', { keepAfterRouteChange: true });
             this.router.navigate(['../login'], { relativeTo: this.route });
         }
-
     }
 }

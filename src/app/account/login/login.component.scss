@@ -9,3 +9,14 @@
 .mat-card .mat-divider-horizontal {
     position: relative;
 }
+
+.error {
+    margin-top: 1rem;
+    color: red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}

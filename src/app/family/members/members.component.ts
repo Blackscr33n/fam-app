@@ -12,8 +12,8 @@ export class MembersComponent implements OnInit {
   familyMembers: User[];
   constructor(private familyService: FamilyService) { }
 
-  ngOnInit(): void {    
-    this.familyMembers = this.familyService.familyValue.members;
+  ngOnInit(): void {
+    this.familyMembers = []; // this.familyService.familyValue.members;
   }
 
 }

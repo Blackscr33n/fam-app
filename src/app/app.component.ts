@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,8 @@ export class AppComponent {
   user: User;
 
   constructor(private accountService: AccountService) {
-      this.accountService.user.subscribe(x => this.user = x);
+    moment.locale('de');
+    this.accountService.user.subscribe(x => this.user = x);
   }
 
-  
 }
