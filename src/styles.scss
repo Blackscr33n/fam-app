@@ -48,10 +48,6 @@ form>* {
 mat-chip-list > .mat-chip-list-wrapper{
   overflow-x: auto;
   flex-wrap: nowrap;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .spinner-container {
