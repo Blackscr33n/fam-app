@@ -117,9 +117,38 @@ export class PurchaseService {
       },
       fetchPolicy: 'network-only'
     }).valueChanges.pipe(
-      map(response => response.data.purchasesByMonth),
-      map(response => response.map((item: PurchaseResponse) => new Purchase(item))
-      )
+      map(response => response.data.calculateMonthlyExpenses)
+    );
+
+  }
+
+  public getSummaryOfCategoriesByMonth(selectedDate: moment.Moment): Observable<Purchase[]> {
+
+    const dateString = selectedDate.format('YYYY-MM');
+    const monthlyCategoryExpenses = gql`
+      query calculateExpensesPerCategory {
+        calculateExpensesPerCategory(purchaseMonth: "${dateString}")
+        {
+        month
+        totalExpenses
+        categoryExpenses
+        {
+          category
+          amount
+          month
+        }
+    }
+  }
+    `;
+
+    return this.apollo.watchQuery<any>({
+      query: monthlyCategoryExpenses,
+      context: {
+        headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+      },
+      fetchPolicy: 'network-only'
+    }).valueChanges.pipe(
+      map(response => response.data.calculateExpensesPerCategory)
     );
 
   }
@@ -129,7 +158,19 @@ export class PurchaseService {
 
     data.forEach(elem => {
       pieChartData.push({
-        name: elem.purchaser.firstname,
+        name: elem.purchaser.firstname.toUpperCase(),
+        value: elem.amount
+      });
+    });
+    return pieChartData;
+  }
+
+  public getCategoryPieChartData(data: any[]): any[] {
+    const pieChartData = [];
+
+    data.forEach(elem => {
+      pieChartData.push({
+        name: elem.category,
         value: elem.amount
       });
     });
