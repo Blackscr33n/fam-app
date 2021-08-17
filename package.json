@@ -3,8 +3,9 @@
   "version": "0.0.3",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "start": "node server.js",
+    "start:dev": "ng serve",
+    "build": "ng build --configuration production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -27,6 +28,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@swimlane/ngx-charts": "^18.0.1",
     "apollo-angular": "^2.6.0",
+    "express": "^4.17.1",
     "graphql": "^15.5.1",
     "moment": "^2.29.1",
     "postcss": "^8.2.15",
