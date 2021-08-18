@@ -1,8 +1,4 @@
-.add-purchase-btn {
-    position: absolute;
-    right: 5vh;
-    bottom: 2.5vh;
-}
+
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
     width: 25%;
 }
@@ -15,6 +11,16 @@ td.mat-cell {
     padding-right: 1rem;
 }
 
+table {
+    margin-bottom: 2rem;
+}
+
 div.spinner-container {
     height: auto;
+}
+
+div.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
