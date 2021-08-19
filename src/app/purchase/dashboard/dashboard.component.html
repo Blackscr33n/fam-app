@@ -125,6 +125,11 @@
             ></tr>
         </tbody>
     </table>
+    
+    
+    <div *ngIf="purchases.length === 0 && isLoading === false">
+        <span>No purchases available</span>
+    </div>
     <div class="button-container">
         <button
             mat-raised-button
@@ -134,11 +139,6 @@
         >
             Add Purchase
         </button>
-    </div>
-
-
-    <div *ngIf="purchases.length === 0 && isLoading === false">
-        <span>No purchases available</span>
     </div>
     <mat-divider></mat-divider>
     <app-purchase-summary

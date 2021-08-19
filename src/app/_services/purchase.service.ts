@@ -170,7 +170,7 @@ export class PurchaseService {
 
     data.forEach(elem => {
       pieChartData.push({
-        name: elem.category,
+        name: (elem.category) ? elem.category : 'NONE',
         value: elem.amount
       });
     });

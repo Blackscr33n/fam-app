@@ -2,16 +2,17 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 import * as moment from 'moment';
 import { PurchaseService } from 'src/app/_services/purchase.service';
 import { LegendPosition } from '@swimlane/ngx-charts';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-purchase-summary',
   templateUrl: './purchase-summary.component.html',
   styleUrls: ['./purchase-summary.component.scss']
 })
-export class PurchaseSummaryComponent implements OnInit, OnChanges, OnDestroy {
+export class PurchaseSummaryComponent implements OnInit, OnDestroy {
   @Input() public isCategory = false;
   @Input() public selectedDate: moment.Moment = moment();
+  @Input() public dateSubject: BehaviorSubject<moment.Moment>;
 
   public summary;
   public pieChartData;
@@ -34,21 +35,11 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    
-    if (
-      changes.selectedDate.previousValue !== undefined &&
-      (changes.selectedDate.currentValue.year() !== changes.selectedDate.previousValue.year()
-        ||
-        changes.selectedDate.currentValue.month() !== changes.selectedDate.previousValue.month()
-      )
-    ) {
-      this.getSummary();
-    }
-  }
-
   ngOnInit(): void {
-    this.getSummary();
+    this.dateSubject.subscribe(selectedDate => {
+      this.selectedDate = selectedDate;
+      this.getSummary();
+    });
   }
 
   private getSummary(): void {
@@ -67,6 +58,8 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges, OnDestroy {
         this.purchaseService.getSummaryOfPurchasesByMonth(this.selectedDate)
           .subscribe((summary) => {
             this.summary = summary;
+            console.log(summary);
+            
             if (this.summary.userExpenses) {
               this.pieChartData = this.purchaseService.getPieChartData(this.summary.userExpenses);
             }
