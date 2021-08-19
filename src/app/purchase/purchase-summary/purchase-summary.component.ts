@@ -23,7 +23,7 @@ export class PurchaseSummaryComponent implements OnInit, OnDestroy {
   public isDoughnut = false;
   public legendPosition: LegendPosition = LegendPosition.Below;
   public colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#F5518E','#4E79F0', '#C7B42C', '#AAAAAA']
   };
 
   private subscriptions: Subscription[] = [];
