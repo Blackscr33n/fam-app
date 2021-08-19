@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Family, User } from '../_models';
 import { FamilyService } from '../_services/family.service';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { debounceTime, finalize, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -12,6 +11,7 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./family.component.scss']
 })
 export class FamilyComponent implements OnInit {
+  familyForm: FormGroup;
   family: Family;
   userControl: FormControl = new FormControl();
   options: User[] = [];
@@ -20,11 +20,21 @@ export class FamilyComponent implements OnInit {
 
   constructor(
     private familyService: FamilyService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
-    this.familyService.loadFamily().subscribe(family => this.family = family);
+    this.familyForm = this.formBuilder.group({
+      familyName: ['', Validators.required],
+    });
+    this.familyService.loadFamily().subscribe(family => {
+      if(family) {
+        this.family = family;
+      } else {
+        this.family = new Family();
+      }
+    });
 
     this.userControl.valueChanges
       .pipe(
@@ -48,9 +58,21 @@ export class FamilyComponent implements OnInit {
   }
 
   public addToFamily(): void {
-    console.log(this.userControl.value);
-    
-    this.familyService.addFamilyMember(this.userControl.value);
+    if(this.family.id) {
+      this.familyService.addFamilyMember(this.userControl.value);
+    } else {
+      this.family.members.push(this.userControl.value);
+    }
+  }
+
+  public addFamily(): void {
+    this.family.name = this.familyForm.value.familyName;
+    this.family.members.push(this.userControl.value);
+    this.familyService.addFamily(this.family).subscribe(family => {
+      this.family = family;
+      this.userControl.reset();
+    });
+
   }
 
 }

@@ -1,23 +1,31 @@
 <div class="container">
-    <h2>Family</h2>
-
+    <h2>Familie</h2>
 
     <div *ngIf="family">
-        <form>
-            <div class="row">
+        <form [formGroup]="familyForm">
+            <div
+                *ngIf="family.id !== '0'"
+                class="row"
+            >
+                Name: {{ family.name }}
+            </div>
+            <div
+                *ngIf="family.id === '0'"
+                class="row"
+            >
                 <mat-form-field>
                     <mat-label>Name:</mat-label>
                     <input
                         matInput
                         name="name"
                         type="text"
-                        [(ngModel)]="family.name"
+                        formControlName="familyName"
                     >
                 </mat-form-field>
             </div>
             <div class="row">
                 <mat-form-field>
-                    <mat-label>Search User</mat-label>
+                    <mat-label>Usersuche</mat-label>
                     <input
                         type="text"
                         matInput
@@ -37,7 +45,23 @@
                     </mat-autocomplete>
                 </mat-form-field>
             </div>
-            <div class="row">
+            <div
+                class="row"
+                *ngIf="family.id === '0'"
+            >
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="addFamily()"
+                    [disabled]="userControl.value == null"
+                >
+                    Add Family
+                </button>
+            </div>
+            <div
+                *ngIf="family.id !== '0'"
+                class="row"
+            >
                 <button
                     mat-raised-button
                     color="primary"
@@ -50,5 +74,5 @@
         </form>
     </div>
 
-    <app-members></app-members>
+    <app-members [members]="family?.members"></app-members>
 </div>

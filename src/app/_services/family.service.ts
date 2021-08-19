@@ -57,7 +57,7 @@ export class FamilyService {
                     name: "${family.name}",
                     members: "${memberIds}"
                     )
-                    {name, members { firstname, lastname}}
+                    {id, name, members { firstname, lastname}}
             }
         `;
 
@@ -76,7 +76,7 @@ export class FamilyService {
                 addFamilyMember(
                     userId: "${user.id}"
                     )
-                    {name, members {id, firstname, lastname}}
+                    {id, name, members {id, firstname, lastname}}
             }
         `;
 
