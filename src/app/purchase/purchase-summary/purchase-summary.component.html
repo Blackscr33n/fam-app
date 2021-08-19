@@ -6,6 +6,11 @@
         &nbsp;{{owe.amount | currency: 'EUR'}}
     </p>
 
+    <div *ngFor="let expense of summary.userExpenses">
+        {{expense.purchaser.firstname + ' ' +expense.purchaser.lastname}}: 
+        &nbsp;{{expense.amount | currency: 'EUR'}}
+    </div>
+
     <ngx-charts-pie-chart *ngIf="pieChartData"
     [view]="view"
     [scheme]="colorScheme"
