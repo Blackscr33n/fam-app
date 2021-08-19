@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { PurchaseService } from '../../_services/purchase.service';
 import { Purchase } from '../../_models/purchase';
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-purchase-list',
@@ -16,11 +16,14 @@ export class PurchaseListComponent implements AfterViewInit, OnDestroy, OnInit {
   public selectedDate: moment.Moment = moment();
   public yearPickerControl: FormControl = new FormControl();
   public isLoading = true;
+  public dateSubject: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
 
   private subscriptions: Subscription[] = [];
 
+
   constructor(
-    private purchaseService: PurchaseService
+    private purchaseService: PurchaseService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.yearPickerControl.setValue(this.selectedDate.toDate());
   }
@@ -37,6 +40,7 @@ export class PurchaseListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.subscriptions.push(this.yearPickerControl.valueChanges.subscribe(value => {
       this.selectedDate.year(moment(value).year());
       this.getPurchases();
+      this.dateSubject.next(this.selectedDate);
     }
     ));
   }
@@ -51,6 +55,7 @@ export class PurchaseListComponent implements AfterViewInit, OnDestroy, OnInit {
 
   handleSelectedMonth(month: any): void {
     this.selectedDate.month(month);
+    this.dateSubject.next(this.selectedDate);
     this.getPurchases();
   }
 
