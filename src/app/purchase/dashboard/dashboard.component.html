@@ -1,8 +1,13 @@
 <!-- Add Expansion Panel for every month -->
 <div class="container">
-    <h1>Dashboard</h1>
 
-    <div *ngIf="isLoading" class="spinner-container">
+
+
+    <h1>Dashboard</h1>
+    <div
+        *ngIf="isLoading"
+        class="spinner-container"
+    >
         <mat-spinner></mat-spinner>
     </div>
     <table
@@ -10,6 +15,8 @@
         [dataSource]="purchases"
         *ngIf="purchases.length != 0 && isLoading === false"
     >
+
+
 
         <!-- Date Column -->
         <ng-container matColumnDef="date">
@@ -29,6 +36,7 @@
 
 
 
+
         <!-- Title Column -->
         <ng-container matColumnDef="title">
             <th
@@ -44,6 +52,9 @@
                 {{element.title}}
             </td>
         </ng-container>
+
+
+
 
         <!-- Title Column -->
         <ng-container matColumnDef="category">
@@ -61,6 +72,9 @@
             </td>
         </ng-container>
 
+
+
+
         <!-- Purchaser Column -->
         <ng-container matColumnDef="purchaser">
             <th
@@ -76,6 +90,9 @@
                 {{element.purchaser.firstname + ' ' + element.purchaser.lastname}}
             </td>
         </ng-container>
+
+
+
 
         <!-- Amount Column -->
         <ng-container matColumnDef="amount">
@@ -108,6 +125,18 @@
             ></tr>
         </tbody>
     </table>
+    <div class="button-container">
+        <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="'/purchase/add'"
+            class="add-purchase-btn"
+            aria-label="add"
+        >
+            Add Purchase
+        </button>
+    </div>
+
 
     <div *ngIf="purchases.length === 0 && isLoading === false">
         <span>No purchases available</span>
@@ -118,12 +147,3 @@
         [selectedDate]="selectedDate"
     ></app-purchase-summary>
 </div>
-<button
-    mat-fab
-    color="primary"
-    [routerLink]="'/purchase/add'"
-    class="add-purchase-btn"
-    aria-label="icon button with a add icon"
->
-    <mat-icon>add</mat-icon>
-</button>

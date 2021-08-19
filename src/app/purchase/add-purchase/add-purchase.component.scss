@@ -9,3 +9,12 @@
 .save-btn {
     float: right;
 }
+
+
+.button-container {
+    display: flex;
+    button {
+        margin-right: 1rem;
+        padding: 0 3rem;
+    }
+}

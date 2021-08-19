@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/_models';
 import { FamilyService } from 'src/app/_services/family.service';
 
@@ -7,13 +8,20 @@ import { FamilyService } from 'src/app/_services/family.service';
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })
-export class MembersComponent implements OnInit {
+export class MembersComponent implements OnInit, OnDestroy {
 
-  familyMembers: User[];
+  public familyMembers: User[];
+  public subscriptions: Subscription[] = [];
   constructor(private familyService: FamilyService) { }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   ngOnInit(): void {
-    this.familyMembers = []; // this.familyService.familyValue.members;
+    this.subscriptions.push(
+      this.familyService.loadFamily().subscribe(family => this.familyMembers = family.members)
+    );
   }
 
 }
