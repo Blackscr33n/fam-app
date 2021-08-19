@@ -74,7 +74,7 @@ export class FamilyService {
             mutation addFamilyMember
             {
                 addFamilyMember(
-                    userId: '${user.id}'
+                    userId: "${user.id}"
                     )
                     {name, members {id, firstname, lastname}}
             }

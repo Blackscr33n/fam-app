@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Apollo, gql } from 'apollo-angular';
 
-import { User } from '../_models';
+import { User, UserResponse } from '../_models';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -22,16 +23,6 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    private GET_USER = gql`
-        query user {
-            user {
-                id
-                email
-                firstname
-                lastname
-            }
-        }
-    `;
 
     public async login(username, password): Promise<User> {
         const loginCred = gql`
@@ -95,6 +86,17 @@ export class AccountService {
         return (res.data as any).register;
     }
 
+    private GET_USER = gql`
+        query user {
+            user {
+                id
+                email
+                firstname
+                lastname
+            }
+        }
+    `;
+
     getByUsername(): Promise<any> {
         return this.apollo.watchQuery<any>({
             query: this.GET_USER,
@@ -103,6 +105,29 @@ export class AccountService {
                 headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             },
         }).result();
+    }
+
+    getByName(name: string): Observable<User[]> {
+        const query = gql`
+        query userByName {
+            userByName(name: "${name}") {
+                id
+                firstname
+                lastname
+            }
+        }
+    `;
+        return this.apollo.watchQuery<any>({
+            query: query,
+            context: {
+                // example of setting the headers with context per operation
+                headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+            },
+        }).valueChanges.pipe(
+            map(response => response.data.userByName),
+            map(response => response.map((user: UserResponse) => new User(user))
+            )
+        );
     }
 
 }

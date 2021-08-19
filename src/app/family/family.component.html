@@ -1,28 +1,54 @@
 <div class="container">
     <h2>Family</h2>
 
+
     <div *ngIf="family">
         <form>
-            <div class="row" >
+            <div class="row">
                 <mat-form-field>
                     <mat-label>Name:</mat-label>
-                    <input matInput name="name" type="text" [(ngModel)]="family.name" >
+                    <input
+                        matInput
+                        name="name"
+                        type="text"
+                        [(ngModel)]="family.name"
+                    >
                 </mat-form-field>
             </div>
             <div class="row">
-                <mat-form-field >
+                <mat-form-field>
                     <mat-label>Search User</mat-label>
-                    <input type="text" matInput [formControl]="userControl" [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{option.username}}
-                    </mat-option>
+                    <input
+                        type="text"
+                        matInput
+                        [formControl]="userControl"
+                        [matAutocomplete]="auto"
+                    >
+                    <mat-autocomplete
+                        #auto="matAutocomplete"
+                        [displayWith]="displayFn"
+                    >
+                        <mat-option
+                            *ngFor="let option of filteredOptions"
+                            [value]="option"
+                        >
+                            {{option.firstname}}&nbsp;{{option.lastname}}
+                        </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="addToFamily()" [disabled]="userControl.value == null">Add User</button>
+            </div>
+            <div class="row">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="addToFamily()"
+                    [disabled]="userControl.value == null"
+                >
+                    Add User
+                </button>
             </div>
         </form>
     </div>
-    
+
     <app-members></app-members>
 </div>
