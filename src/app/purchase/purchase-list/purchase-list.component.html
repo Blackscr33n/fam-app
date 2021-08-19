@@ -116,6 +116,17 @@
         </tbody>
     </table>
 
+    <div class="button-container">
+        <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="'/purchase/add'"
+            aria-label="add"
+        >
+            Add Purchase
+        </button>
+    </div>
+
     <div *ngIf="purchases.length === 0 && isLoading === false">
         <span>No purchases available</span>
     </div>
@@ -126,12 +137,3 @@
         [isCategory]="true"
     ></app-purchase-summary>
 </div>
-<button
-    mat-fab
-    color="primary"
-    [routerLink]="'/purchase/add'"
-    class="add-purchase-btn"
-    aria-label="icon button with a add icon"
->
-    <mat-icon>add</mat-icon>
-</button>
