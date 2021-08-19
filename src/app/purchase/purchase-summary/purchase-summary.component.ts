@@ -35,7 +35,6 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes", changes);
     
     if (
       changes.selectedDate.previousValue !== undefined &&
@@ -44,8 +43,6 @@ export class PurchaseSummaryComponent implements OnInit, OnChanges, OnDestroy {
         changes.selectedDate.currentValue.month() !== changes.selectedDate.previousValue.month()
       )
     ) {
-      console.log("changes");
-      
       this.getSummary();
     }
   }

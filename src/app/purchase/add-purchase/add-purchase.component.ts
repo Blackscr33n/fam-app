@@ -26,7 +26,6 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
     private familyService: FamilyService
   ) {
     this.purchase = new Purchase();
-    console.log(this.categories);
 
   }
 
@@ -44,7 +43,6 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
 
   savePurchase(): void {
     this.loading = true;
-    console.log(this.purchase);
 
     this.purchaseService.addPurchase(this.purchase).subscribe(purchase => {
       this.purchase = new Purchase();
