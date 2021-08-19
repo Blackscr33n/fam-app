@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Purchase } from 'src/app/_models';
 import { PurchaseService } from 'src/app/_services/purchase.service';
 
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   public selectedDate: moment.Moment = moment();
   public yearPickerControl: FormControl = new FormControl();
   public isLoading = true;
+  public dateSubject: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
 
   private subscriptions: Subscription[] = [];
 
@@ -37,6 +38,7 @@ export class DashboardComponent implements OnInit {
     this.subscriptions.push(this.yearPickerControl.valueChanges.subscribe(value => {
       this.selectedDate.year(moment(value).year());
       this.getPurchases();
+      this.dateSubject.next(this.selectedDate);
     }
     ));
   }

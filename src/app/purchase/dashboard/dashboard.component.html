@@ -2,6 +2,11 @@
 <div class="container">
 
 
+    <img
+        src="/assets/logo.svg"
+        alt="Family Finance"
+    >
+
 
     <h1>Dashboard</h1>
     <div
@@ -15,6 +20,7 @@
         [dataSource]="purchases"
         *ngIf="purchases.length != 0 && isLoading === false"
     >
+
 
 
 
@@ -33,6 +39,7 @@
                 {{element.purchaseDate | date: 'mediumDate' }}
             </td>
         </ng-container>
+
 
 
 
@@ -56,6 +63,7 @@
 
 
 
+
         <!-- Title Column -->
         <ng-container matColumnDef="category">
             <th
@@ -75,6 +83,7 @@
 
 
 
+
         <!-- Purchaser Column -->
         <ng-container matColumnDef="purchaser">
             <th
@@ -90,6 +99,7 @@
                 {{element.purchaser.firstname + ' ' + element.purchaser.lastname}}
             </td>
         </ng-container>
+
 
 
 
@@ -114,6 +124,7 @@
 
 
 
+
         <tbody>
             <tr
                 mat-header-row
@@ -125,8 +136,9 @@
             ></tr>
         </tbody>
     </table>
-    
-    
+
+
+
     <div *ngIf="purchases.length === 0 && isLoading === false">
         <span>No purchases available</span>
     </div>
@@ -144,5 +156,6 @@
     <app-purchase-summary
         *ngIf="purchases.length != 0"
         [selectedDate]="selectedDate"
+        [dateSubject]="dateSubject"
     ></app-purchase-summary>
 </div>
