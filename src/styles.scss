@@ -33,9 +33,6 @@ div {
   font-weight: 300;
 }
 
-.mat-drawer-content {
-  overflow: inherit !important;
-}
 
 form {
   display: flex;
@@ -63,4 +60,8 @@ mat-chip-list > .mat-chip-list-wrapper{
 
 .mat-toolbar.mat-primary {
   height: 3rem;
+}
+
+.mat-drawer-container {
+  height: calc(100vh - 3rem);
 }

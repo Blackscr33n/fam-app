@@ -9,8 +9,7 @@ import * as moment from 'moment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'fam-app';
-  user: User;
+  public user: User;
 
   constructor(private accountService: AccountService) {
     moment.locale('de');
