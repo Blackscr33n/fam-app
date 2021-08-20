@@ -46,6 +46,13 @@ form>* {
 mat-chip-list > .mat-chip-list-wrapper{
   overflow-x: auto;
   flex-wrap: nowrap;
+  width: 90vw;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.mat-chip-list-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .spinner-container {
