@@ -16,7 +16,7 @@ export class PurchaseSummaryComponent implements OnInit, OnDestroy {
 
   public summary;
   public pieChartData;
-  public view: [number, number] = [window.innerWidth, 300];
+  public view: [number, number] = [window.innerWidth - 20, 270];
   public gradient = true;
   public showLegend = false;
   public showLabels = true;

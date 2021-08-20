@@ -80,7 +80,7 @@
                 mat-cell
                 *matCellDef="let element"
             >
-                {{element.purchaser.firstname + ' ' + element.purchaser.lastname}}
+                {{element.purchaser.firstname }}
             </td>
         </ng-container>
 
@@ -101,9 +101,6 @@
             </td>
         </ng-container>
 
-
-
-
         <tbody>
             <tr
                 mat-header-row
@@ -115,7 +112,6 @@
             ></tr>
         </tbody>
     </table>
-
     
     <div *ngIf="purchases.length === 0 && isLoading === false">
         <span>No purchases available</span>
