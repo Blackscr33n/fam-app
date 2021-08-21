@@ -6,7 +6,8 @@ export enum Category {
     Lebensmittel = 'Lebensmittel',
     Baby = 'Baby',
     Wohnung = 'Wohnung',
-    Freizeit = 'Freizeit'
+    Freizeit = 'Freizeit',
+    Auto = 'Auto'
 }
 
 export const CategoryMapping: Record<Category, string> = {
@@ -14,7 +15,8 @@ export const CategoryMapping: Record<Category, string> = {
     [Category.Baby]: 'Baby',
     [Category.Lebensmittel]: 'Lebensmittel',
     [Category.Wohnung]: 'Wohnung',
-    [Category.Freizeit]: 'Freizeit'
+    [Category.Freizeit]: 'Freizeit',
+    [Category.Auto]: 'Auto',
 };
 
 export interface PurchaseResponse {
