@@ -5,6 +5,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AccountService } from '../../_services/account.service';
 import { AlertService } from '../../_services/alert.service';
 import { FamilyService } from 'src/app/_services/family.service';
+import { catchError, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -39,7 +41,7 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f(): { [key: string]: AbstractControl } { return this.form.controls; }
 
-    async onSubmit(): Promise<void> {
+    public onSubmit(): void {
         this.submitted = true;
 
         // reset alerts on submit
@@ -51,17 +53,23 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        const user = await this.accountService.login(this.f.username.value, this.f.password.value).catch((err) => {
-            this.alertService.error(err);
-            this.error = err;
-            this.submitted = false;
-            this.loading = false;
-        });
+        this.accountService.login(this.f.username.value, this.f.password.value).subscribe(token => {
+            this.accountService.setToken(token);
 
-        if (user) {
-            this.familyService.loadFamily();
-            this.router.navigate([this.returnUrl]);
-        }
+            this.accountService.getByUsername().subscribe(user => {
+                if (user) {
+                    this.accountService.setUser(user);
+                    this.familyService.loadFamily().subscribe();
+                    this.router.navigate([this.returnUrl]);
+                }
+            });
+        },
+            err => {
+                this.alertService.error(err);
+                this.error = err;
+                this.submitted = false;
+                this.loading = false;
+            })
     }
 
 }
