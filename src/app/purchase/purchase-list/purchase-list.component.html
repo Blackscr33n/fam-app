@@ -1,6 +1,6 @@
 <!-- Add Expansion Panel for every month -->
 <div class="container">
-    <h1>Purchases</h1>
+    <h1>Ausgaben</h1>
 
     <app-year-picker
         [formControl]="yearPickerControl"
@@ -114,7 +114,7 @@
     </table>
     
     <div *ngIf="purchases.length === 0 && isLoading === false">
-        <span>No purchases available</span>
+        <span>Keine Ausgaben verfügbar</span>
     </div>
     <div class="button-container">
         <button
@@ -123,7 +123,7 @@
             [routerLink]="'/purchase/add'"
             aria-label="add"
         >
-            Add Purchase
+            Ausgabe hinzufügen
         </button>
     </div>
     <mat-divider></mat-divider>

@@ -8,36 +8,8 @@
     </button>
     <div class="logo">
         <img src="/assets/logo.png" alt="Family Finance" />
-        <!--svg
-            id="Ebene_1"
-            data-name="Ebene 1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 620 65.07"
-            style="width: auto; height: 60%;"
-        >
-            <defs>
-                <style>
-                    .cls-1,.cls-2{isolation:isolate;font-size:64px;font-family:PassionOne-Regular, Passion One;letter-spacing:0.01em;}.cls-2{fill:#878787;}
-                </style>
-            </defs>
-            <text
-                class="cls-1"
-                transform="translate(202.36 52.4)"
-            >
-                FAMILY
-            </text>
-            <text
-                class="cls-2"
-                transform="matrix(-1, 0, 0, 1, 202.36, 51.87)"
-            >
-                FINANCE
-            </text>
-        </svg-->
     </div>
 </mat-toolbar>
-
-
-
 
 <mat-sidenav-container>
     <mat-sidenav
@@ -60,14 +32,14 @@
                 (click)="closeNav()"
                 [routerLink]="'/purchase'"
             >
-                Purchases
+                Ausgaben
             </a>
             <a
                 mat-list-item
                 (click)="closeNav()"
                 [routerLink]="'/family'"
             >
-                Family
+                Familie
             </a>
         </mat-nav-list>
         <mat-divider [inset]="false"></mat-divider>

@@ -29,11 +29,6 @@
                 {{element.purchaseDate | date: 'mediumDate' }}
             </td>
         </ng-container>
-
-
-
-
-
         <!-- Title Column -->
         <ng-container matColumnDef="title">
             <th
@@ -49,11 +44,6 @@
                 {{element.title}}
             </td>
         </ng-container>
-
-
-
-
-
         <!-- Title Column -->
         <ng-container matColumnDef="category">
             <th
@@ -69,11 +59,6 @@
                 {{element.category}}
             </td>
         </ng-container>
-
-
-
-
-
         <!-- Purchaser Column -->
         <ng-container matColumnDef="purchaser">
             <th
@@ -89,11 +74,6 @@
                 {{element.purchaser.firstname + ' ' + element.purchaser.lastname}}
             </td>
         </ng-container>
-
-
-
-
-
         <!-- Amount Column -->
         <ng-container matColumnDef="amount">
             <th
@@ -111,10 +91,6 @@
             </td>
         </ng-container>
 
-
-
-
-
         <tbody>
             <tr
                 mat-header-row
@@ -126,11 +102,8 @@
             ></tr>
         </tbody>
     </table>
-
-
-
     <div *ngIf="purchases.length === 0 && isLoading === false">
-        <span>No purchases available</span>
+        <span>Keine Ausgaben verfügbar</span>
     </div>
     <div class="button-container">
         <button
@@ -139,7 +112,7 @@
             [routerLink]="'/purchase/add'"
             aria-label="add"
         >
-            Add Purchase
+            Ausgabe hinzufügen
         </button>
     </div>
     <mat-divider></mat-divider>
