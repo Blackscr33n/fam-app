@@ -1,15 +1,16 @@
 <!-- Add Expansion Panel for every month -->
 <div class="container">
-    <h1>Ausgaben</h1>
-
+    <h1>{{ 'purchases.expenses' | translate }}</h1>
     <app-year-picker
         [formControl]="yearPickerControl"
         [touchUi]="true"
-        label="Jahr"
+        label="{{ 'purchases.year' | translate }}"
     ></app-year-picker>
-
     <app-month-picker (selectedMonth)="handleSelectedMonth($event)"></app-month-picker>
-    <div *ngIf="isLoading" class="spinner-container">
+    <div
+        *ngIf="isLoading"
+        class="spinner-container"
+    >
         <mat-spinner></mat-spinner>
     </div>
     <table
@@ -24,7 +25,7 @@
                 mat-header-cell
                 *matHeaderCellDef
             >
-                DATUM
+            {{ 'purchases.date' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -34,15 +35,13 @@
             </td>
         </ng-container>
 
-
-
         <!-- Title Column -->
         <ng-container matColumnDef="title">
             <th
                 mat-header-cell
                 *matHeaderCellDef
             >
-                TITEL
+            {{ 'purchases.title' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -52,13 +51,14 @@
             </td>
         </ng-container>
 
+
         <!-- Title Column -->
         <ng-container matColumnDef="category">
             <th
                 mat-header-cell
                 *matHeaderCellDef
             >
-                KATEGORIE
+                {{ 'purchases.category' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -68,13 +68,14 @@
             </td>
         </ng-container>
 
+
         <!-- Purchaser Column -->
         <ng-container matColumnDef="purchaser">
             <th
                 mat-header-cell
                 *matHeaderCellDef
             >
-                KÄUFER
+                {{ 'purchases.buyer' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -84,13 +85,14 @@
             </td>
         </ng-container>
 
+
         <!-- Amount Column -->
         <ng-container matColumnDef="amount">
             <th
                 mat-header-cell
                 *matHeaderCellDef
             >
-                BETRAG
+                {{ 'purchases.amount' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -100,6 +102,7 @@
                 {{element.amount | currency : 'EUR'}}
             </td>
         </ng-container>
+
 
         <tbody>
             <tr
@@ -112,9 +115,12 @@
             ></tr>
         </tbody>
     </table>
-    
+
+
     <div *ngIf="purchases.length === 0 && isLoading === false">
-        <span>Keine Ausgaben verfügbar</span>
+        <span>
+            {{ 'purchases.no-purchases-available' | translate }}
+        </span>
     </div>
     <div class="button-container">
         <button
@@ -123,7 +129,7 @@
             [routerLink]="'/purchase/add'"
             aria-label="add"
         >
-            Ausgabe hinzufügen
+            {{ 'purchases.add-purchase' | translate}}
         </button>
     </div>
     <mat-divider></mat-divider>

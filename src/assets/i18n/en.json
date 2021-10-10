@@ -1,0 +1,15 @@
+{
+    "purchases": {
+        "owes": "owes",
+        "add-purchase": "Add purchase",
+        "no-purchases-available": "No purchases available",
+        "amount": "Amount",
+        "buyer": "buyer",
+        "category": "Kategorie",
+        "title": "Titel",
+        "date": "Datum",
+        "expenses": "Ausgaben",
+        "year": "Jahr",
+        "dashboard": "Dashboard"
+    }
+}

@@ -2,7 +2,7 @@
     
     <p *ngFor="let owe of summary.owes">
         {{owe.debtor.firstname + ' ' + owe.debtor.lastname}} 
-        owes {{owe.creditor.firstname + ' ' + owe.creditor.lastname}}
+        {{ 'owes' | translate }} {{owe.creditor.firstname + ' ' + owe.creditor.lastname}}
         &nbsp;{{owe.amount | currency: 'EUR'}}
     </p>
 

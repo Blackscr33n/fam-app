@@ -1,0 +1,15 @@
+{
+    "purchases": {
+        "owe": "schuldet",
+        "add-purchase": " Ausgabe hinzufügen",
+        "no-purchases-available": "Keine Ausgaben verfügbar",
+        "amount": "Betrag",
+        "buyer": "Käufer",
+        "category": "Kategorie",
+        "title": "Titel",
+        "date": "Datum",
+        "expenses": "Ausgaben",
+        "year": "Jahr",
+        "dashboard": "Dashboard"
+    }
+}

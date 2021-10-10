@@ -9,6 +9,7 @@ import { DashboardComponent } from 'src/app/purchase/dashboard/dashboard.compone
 import { AddPurchaseComponent } from 'src/app/purchase/add-purchase/add-purchase.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ComponentsModule } from 'src/app/_components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { ComponentsModule } from 'src/app/_components/components.module';
         PurchaseRoutingModule,
         MaterialModule,
         NgxChartsModule,
-        ComponentsModule
+        ComponentsModule,
+        TranslateModule
     ],
     declarations: [
         PurchaseListComponent,
