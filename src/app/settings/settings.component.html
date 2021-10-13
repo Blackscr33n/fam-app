@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>{{ 'settings.settings' | translate }}</h1>
+
+    <form [formGroup]="settingsForm">
+        <mat-form-field appearance="fill">
+            <mat-label>{{ 'settings.language' | translate }}</mat-label>
+            <mat-select formControlName="language">
+              <mat-option *ngFor="let lang of languages" [value]="lang.value">{{ lang.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </form>
+      <button
+            class="save-btn"
+            mat-raised-button
+            color="primary"
+            (click)="saveSettings()"
+        >
+        {{ 'general.save' | translate }}
+        </button>
+</div>

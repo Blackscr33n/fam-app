@@ -24,6 +24,7 @@ import { MaterialModule } from './_helpers/material.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { PurchaseModule } from './purchase/purchase.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SettingsComponent } from './settings/settings.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NavbarComponent,
     AlertComponent,
     FamilyComponent,
-    MembersComponent
+    MembersComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

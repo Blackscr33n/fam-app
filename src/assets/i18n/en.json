@@ -1,15 +1,56 @@
 {
+    "general": {
+        "cancel": "Cancel",
+        "save": "Save"
+    },
     "purchases": {
         "owes": "owes",
         "add-purchase": "Add purchase",
         "no-purchases-available": "No purchases available",
         "amount": "Amount",
-        "buyer": "buyer",
-        "category": "Kategorie",
-        "title": "Titel",
-        "date": "Datum",
-        "expenses": "Ausgaben",
-        "year": "Jahr",
-        "dashboard": "Dashboard"
+        "buyer": "Buyer",
+        "category": "Category",
+        "title": "Title",
+        "date": "Date",
+        "expenses": "Expenses",
+        "year": "Year",
+        "dashboard": "Dashboard",
+        "new-purchasse": "New Purchase",
+        "purchase-date": "Purchasedate"
+    },
+    "navigation": {
+        "expenses": "Expenses",
+        "dashboard": "Dashboard",
+        "family": "Family",
+        "login": "Login",
+        "logout": "Logout",
+        "settings": "Settings"
+    },
+    "family": {
+        "family": "Family",
+        "name": "Name",
+        "usersearch": "Usersearch",
+        "add-family": "Add Family",
+        "add-user": "Add User"
+    },
+    "months": {
+        "jan": "Jan.",
+        "feb": "Feb.",
+        "mar": "Mar.",
+        "apr": "Apr.",
+        "may": "May",
+        "jun": "Jun.",
+        "jul": "Jul.",
+        "aug": "Aug.",
+        "sep": "Sep.",
+        "oct": "Oct.",
+        "nov": "Nov.",
+        "dec": "Dec."
+    },
+    "settings": {
+        "settings": "Settings",
+        "language": "Language",
+        "german": "German",
+        "english": "English"
     }
 }

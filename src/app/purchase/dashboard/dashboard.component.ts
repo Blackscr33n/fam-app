@@ -47,6 +47,8 @@ export class DashboardComponent implements OnInit {
     this.isLoading = true;
     this.purchaseService.getPurchasesByMonth(this.selectedDate).subscribe((data) => {
       this.purchases = data;
+      console.log(data);
+      
       this.isLoading = false;
     });
   }

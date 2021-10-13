@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Familie</h2>
+    <h2>{{ 'family.family' | translate }}</h2>
 
     <div *ngIf="family">
         <form [formGroup]="familyForm">
@@ -7,14 +7,14 @@
                 *ngIf="family.id !== '0'"
                 class="row"
             >
-                Name: {{ family.name }}
+            {{ 'family.name' | translate }}: {{ family.name }}
             </div>
             <div
                 *ngIf="family.id === '0'"
                 class="row"
             >
                 <mat-form-field>
-                    <mat-label>Name:</mat-label>
+                    <mat-label>{{ 'family.name' | translate }}</mat-label>
                     <input
                         matInput
                         name="name"
@@ -25,7 +25,7 @@
             </div>
             <div class="row">
                 <mat-form-field>
-                    <mat-label>Usersuche</mat-label>
+                    <mat-label>{{ 'family.usersearch' | translate }}</mat-label>
                     <input
                         type="text"
                         matInput
@@ -55,7 +55,7 @@
                     (click)="addFamily()"
                     [disabled]="userControl.value == null"
                 >
-                    Add Family
+                {{ 'family.add-family' | translate }}
                 </button>
             </div>
             <div
@@ -68,7 +68,7 @@
                     (click)="addToFamily()"
                     [disabled]="userControl.value == null"
                 >
-                    Add User
+                {{ 'family.add-user' | translate }}
                 </button>
             </div>
         </form>

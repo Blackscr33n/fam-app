@@ -25,21 +25,28 @@
                 (click)="closeNav()"
                 [routerLink]="'/purchase/dashboard'"
             >
-                Dashboard
+                {{ 'navigation.dashboard' | translate }}
             </a>
             <a
                 mat-list-item
                 (click)="closeNav()"
                 [routerLink]="'/purchase'"
             >
-                Ausgaben
+            {{ 'navigation.expenses' | translate }}
             </a>
             <a
                 mat-list-item
                 (click)="closeNav()"
                 [routerLink]="'/family'"
             >
-                Familie
+            {{ 'navigation.family' | translate }}
+            </a>
+            <a
+                mat-list-item
+                (click)="closeNav()"
+                [routerLink]="'/settings'"
+            >
+            {{ 'navigation.settings' | translate }}
             </a>
         </mat-nav-list>
         <mat-divider [inset]="false"></mat-divider>
@@ -50,14 +57,14 @@
                 (click)="closeNav()"
                 [routerLink]="'/account/login'"
             >
-                Login
+            {{ 'navigation.login' | translate }}
             </a>
             <a
                 mat-list-item
                 *ngIf="isLoggedIn"
                 (click)="logout()"
             >
-                Logout
+            {{ 'navigation.logout' | translate }}
             </a>
         </mat-nav-list>
     </mat-sidenav>

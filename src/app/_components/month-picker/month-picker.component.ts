@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatChipList } from '@angular/material/chips';
+import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 
 @Component({
@@ -8,30 +8,33 @@ import * as moment from 'moment';
   templateUrl: './month-picker.component.html',
   styleUrls: ['./month-picker.component.scss']
 })
-export class MonthPickerComponent {
+export class MonthPickerComponent implements OnInit {
 
   @Output() selectedMonth: EventEmitter<number> = new EventEmitter<number>();
   public monthControl = new FormControl(moment().month());
 
-  public months: any[] = [
-    { label: 'Jan.', value: 0 },
-    { label: 'Feb.', value: 1 },
-    { label: 'Mär.', value: 2 },
-    { label: 'Apr.', value: 3 },
-    { label: 'Mai', value: 4 },
-    { label: 'Juni', value: 5 },
-    { label: 'Juli', value: 6 },
-    { label: 'Aug.', value: 7 },
-    { label: 'Sep.', value: 8 },
-    { label: 'Okt.', value: 9 },
-    { label: 'Nov.', value: 10 },
-    { label: 'Dez.', value: 11 },
-  ];
+  public months: any[] = [];
 
-  @ViewChild('chipList') chipList: MatChipList;
+  constructor(private translate: TranslateService) {}
 
-  constructor() {
-    // this.monthControl.setValue();
+  public ngOnInit(): void {
+    this.translate.get('months').subscribe((data:any)=> {
+      this.months = [
+        { label: data.jan, value: 0 },
+        { label: data.feb, value: 1 },
+        { label: data.mar, value: 2 },
+        { label: data.apr, value: 3 },
+        { label: data.may, value: 4 },
+        { label: data.jun, value: 5 },
+        { label: data.jul, value: 6 },
+        { label: data.aug, value: 7 },
+        { label: data.sep, value: 8 },
+        { label: data.oct, value: 9 },
+        { label: data.nov, value: 10 },
+        { label: data.dec, value: 11 },
+      ]
+     });
+    
   }
 
   handleClick(month: any): void {

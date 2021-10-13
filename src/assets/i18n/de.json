@@ -1,4 +1,8 @@
 {
+    "general": {
+        "cancel": "Abbrechen",
+        "save": "Speichern"
+    },
     "purchases": {
         "owe": "schuldet",
         "add-purchase": " Ausgabe hinzufügen",
@@ -10,6 +14,43 @@
         "date": "Datum",
         "expenses": "Ausgaben",
         "year": "Jahr",
-        "dashboard": "Dashboard"
+        "dashboard": "Dashboard",
+        "new-purchasse": "Neuer Einkauf",
+        "purchase-date": "Kaufdatum"
+    },
+    "navigation": {
+        "expenses": "Ausgaben",
+        "dashboard": "Dashboard",
+        "family": "Familie",
+        "login": "Anmelden",
+        "logout": "Abmelden",
+        "settings": "Einstellungen"
+    },
+    "family": {
+        "family": "Familie",
+        "name": "Name",
+        "usersearch": "Benutzersuche",
+        "add-family": "Familie hinzufügen",
+        "add-user": "Benutzer hinzufügen"
+    },
+    "months": {
+        "jan": "Jan.",
+        "feb": "Feb.",
+        "mar": "Mär.",
+        "apr": "Apr.",
+        "may": "Mai",
+        "jun": "Jun.",
+        "jul": "Jul.",
+        "aug": "Aug.",
+        "sep": "Sep.",
+        "oct": "Okt.",
+        "nov": "Nov.",
+        "dec": "Dez."
+    },
+    "settings": {
+        "settings": "Einstellungen",
+        "language": "Sprache",
+        "german": "Deutsch",
+        "english": "Englisch"
     }
 }
