@@ -1,11 +1,12 @@
 import { CategoryMapping } from '../../_models/purchase';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Category, Purchase } from '../../_models/purchase';
+import { Purchase } from '../../_models/purchase';
 import { PurchaseService } from '../../_services/purchase.service';
 import { Router } from '@angular/router';
 import { FamilyService } from 'src/app/_services/family.service';
 import { Family } from 'src/app/_models';
 import { Subscription } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-add-purchase',
@@ -15,6 +16,7 @@ import { Subscription } from 'rxjs';
 export class AddPurchaseComponent implements OnInit, OnDestroy {
 
   public purchase: Purchase;
+  public purchaseForm: FormGroup;
   public family: Family;
   public categories: any = Object.values(CategoryMapping);
   public loading = true;
@@ -23,10 +25,10 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
   constructor(
     private purchaseService: PurchaseService,
     private router: Router,
-    private familyService: FamilyService
+    private familyService: FamilyService,
+    private fb: FormBuilder
   ) {
     this.purchase = new Purchase();
-
   }
 
   ngOnInit(): void {
@@ -34,6 +36,13 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
     this.familyService.loadFamily().subscribe(family => {
       this.family = family;
       this.loading = false;
+    });
+    this.purchaseForm = this.fb.group({
+      purchaseDate: [this.purchase?.purchaseDate || ''],
+      title: [this.purchase?.title || ''],
+      category: [this.purchase?.category || null],
+      purchaser: [this.purchase?.purchaser?.id || null],
+      amount: [this.purchase?.amount || null]
     });
   }
 
@@ -43,7 +52,14 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
 
   savePurchase(): void {
     this.loading = true;
-
+    this.purchase = new Purchase({
+      id: null,
+      amount: this.purchaseForm.get('amount').value,
+      category: this.purchaseForm.get('category').value,
+      purchaseDate: this.purchaseForm.get('purchaseDate').value,
+      purchaser: this.purchaseForm.get('purchaser').value,
+      title: this.purchaseForm.get('title').value,
+    });
     this.purchaseService.addPurchase(this.purchase).subscribe(purchase => {
       this.purchase = new Purchase();
       this.loading = false;

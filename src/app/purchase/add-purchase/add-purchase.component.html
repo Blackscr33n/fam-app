@@ -1,83 +1,91 @@
-<div *ngIf="loading" class="spinner-container">
+<div
+    *ngIf="loading"
+    class="spinner-container"
+>
     <mat-spinner></mat-spinner>
 </div>
 <div
     class="purchase-container"
     *ngIf="!loading"
 >
-    <h2>{{ 'purchases.new-purchase' | translate }}</h2>
-
-    <mat-form-field appearance="fill">
-        <mat-label>{{ 'purchases.purchase-date' | translate }}</mat-label>
-        <input
-            matInput
-            [(ngModel)]="purchase.purchaseDate"
-            [matDatepicker]="picker"
-        >
-        <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker
-            touchUi
-            #picker
-        ></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>{{ 'purchases.title' | translate }}</mat-label>
-        <input
-            matInput
-            placeholder
-            [(ngModel)]="purchase.title"
-        >
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>{{ 'purchases.category' | translate }}</mat-label>
-        <mat-select [(ngModel)]="purchase.category">
-            <mat-option
-                *ngFor="let cat of categories"
-                [value]="cat"
+    <h2>
+        {{ 'purchases.new-purchase' | translate }}
+    </h2>
+    <form [formGroup]="purchaseForm" (ngSubmit)="savePurchase()">
+        <mat-form-field appearance="fill">
+            <mat-label>
+                {{ 'purchases.purchase-date' | translate }}
+            </mat-label>
+            <input
+                matInput
+                formControlName="purchaseDate"
+                [matDatepicker]="picker"
             >
-                {{cat}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>{{ 'purchases.buyer' | translate }}</mat-label>
-        <mat-select [(ngModel)]="purchase.purchaser">
-            <mat-option
-                *ngFor="let member of family.members"
-                [value]="member.id"
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+                touchUi
+                #picker
+            ></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{ 'purchases.title' | translate }}</mat-label>
+            <input
+                matInput
+                placeholder
+                formControlName="title"
             >
-                {{member.firstname}} {{member.lastname}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>{{ 'purchases.amount' | translate }}</mat-label>
-        <input
-            type="number"
-            step="0.01"
-            min="0"
-            matInput
-            placeholder
-            [(ngModel)]="purchase.amount"
-        >
-    </mat-form-field>
-    <div class="button-container">
-        <button
-            mat-button
-            (click)="cancel()"
-        >
-            {{ 'general.cancel' | translate }}
-        </button>
-        <button
-            class="save-btn"
-            mat-raised-button
-            color="primary"
-            (click)="savePurchase()"
-        >
-        {{ 'general.save' | translate }}
-        </button>
-    </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>{{ 'purchases.category' | translate }}</mat-label>
+            <mat-select formControlName="category">
+                <mat-option
+                    *ngFor="let cat of categories"
+                    [value]="cat"
+                >
+                    {{cat}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>{{ 'purchases.buyer' | translate }}</mat-label>
+            <mat-select formControlName="purchaser">
+                <mat-option
+                    *ngFor="let member of family.members"
+                    [value]="member.id"
+                >
+                    {{member.firstname}} {{member.lastname}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{ 'purchases.amount' | translate }}</mat-label>
+            <input
+                type="number"
+                step="0.01"
+                min="0"
+                matInput
+                placeholder
+                formControlName="amount"
+            >
+        </mat-form-field>
+        <div class="button-container">
+            <button
+                mat-button
+                (click)="cancel()"
+            >
+                {{ 'general.cancel' | translate }}
+            </button>
+            <button
+                class="save-btn"
+                mat-raised-button
+                color="primary"
+                (click)="savePurchase()"
+            >
+                {{ 'general.save' | translate }}
+            </button>
+        </div>
+    </form>
 </div>
