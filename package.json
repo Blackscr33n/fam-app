@@ -29,7 +29,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@swimlane/ngx-charts": "^18.0.1",
     "apollo-angular": "^2.6.0",
-    "graphql": "^16.1.0",
+    "graphql": "^15.5.0",
     "moment": "^2.29.1",
     "postcss": "^8.2.15",
     "rxjs": "~7.4.0",
