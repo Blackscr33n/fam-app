@@ -1,28 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Apollo, gql } from 'apollo-angular';
 
 import { User, UserResponse } from '../_models';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
-    constructor(
-        private router: Router,
-        private apollo: Apollo
-    ) {
+    constructor(private router: Router, private apollo: Apollo) {
         this.initUser();
     }
 
     public get userValue(): User {
         return this.userSubject.value;
     }
-
 
     public login(username, password): Observable<string> {
         const loginCred = gql`
@@ -35,12 +31,11 @@ export class AccountService {
             }
         `;
 
-        return this.apollo.mutate({
-            mutation: loginCred
-        }).pipe(
-            map(res => (res.data as any).login)
-        );
-
+        return this.apollo
+            .mutate({
+                mutation: loginCred,
+            })
+            .pipe(map((res) => (res.data as any).login));
     }
 
     public setToken(token: string): void {
@@ -53,7 +48,9 @@ export class AccountService {
     }
 
     private initUser(): void {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.userSubject = new BehaviorSubject<User>(
+            JSON.parse(localStorage.getItem('user'))
+        );
         this.user = this.userSubject.asObservable();
     }
 
@@ -65,30 +62,38 @@ export class AccountService {
         this.router.navigate(['/account/login']);
     }
 
-    async register(user: User): Promise<any> {
-        const firstname = user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
-        const lastname = user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
+    public register(user: User): Observable<any> {
+        const firstname =
+            user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
+        const lastname =
+            user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
         const registerMutation = gql`
-        mutation register {
+        mutation register (
+            $firstname: String!,
+            $lastname: String!,
+            $username: String!,
+            $password: String!
+        ) {
             register (
-                firstname: "${firstname}"
-                lastname: "${lastname}"
-                email: "${user.username}"
-                password: "${user.password}"
+                firstname: $firstname
+                lastname: $lastname
+                email: $username
+                password: $password
             )
             {id,email,firstname,lastname}
         }
         `;
 
-        const res = await this.apollo.mutate({
-            mutation: registerMutation
-        }).toPromise();
+        return this.apollo.mutate({
+            mutation: registerMutation,
+            variables: {
+                firstname,
+                lastname,
+                username: user.username,
+                password: user.password
+            }
+        });
 
-        if (res.errors) {
-            throw new Error(res.errors[0].message);
-        }
-
-        return (res.data as any).register;
     }
 
     private GET_USER = gql`
@@ -97,22 +102,27 @@ export class AccountService {
                 id
                 email
                 firstname
-                lastname
+             lastname
             }
         }
     `;
 
     public getByUsername(): Observable<User> {
-        return this.apollo.watchQuery<any>({
-            query: this.GET_USER,
-            context: {
-                // example of setting the headers with context per operation
-                headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
-            },
-        }).valueChanges.pipe(
-            map(res => res.data.user),
-            map(res => new User(res))
-        )
+        return this.apollo
+            .watchQuery<any>({
+                query: this.GET_USER,
+                context: {
+                    // example of setting the headers with context per operation
+                    headers: new HttpHeaders().set(
+                        'Authorization',
+                        `Bearer ${localStorage.getItem('token')}`
+                    ),
+                },
+            })
+            .valueChanges.pipe(
+                map((res) => res.data.user),
+                map((res) => new User(res))
+            );
     }
 
     public getByName(name: string): Observable<User[]> {
@@ -125,17 +135,20 @@ export class AccountService {
             }
         }
     `;
-        return this.apollo.watchQuery<any>({
-            query: query,
-            context: {
-                // example of setting the headers with context per operation
-                headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
-            },
-        }).valueChanges.pipe(
-            map(response => response.data.userByName),
-            map(response => response.map((user: UserResponse) => new User(user))
-            )
-        );
+        return this.apollo
+            .watchQuery<any>({
+                query: query,
+                context: {
+                    // example of setting the headers with context per operation
+                    headers: new HttpHeaders().set(
+                        'Authorization',
+                        `Bearer ${localStorage.getItem('token')}`
+                    ),
+                },
+            })
+            .valueChanges.pipe(
+                map((response) => response.data.userByName),
+                map((response) => response.map((user: UserResponse) => new User(user)))
+            );
     }
-
 }

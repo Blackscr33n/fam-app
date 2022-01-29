@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 
 import { AccountService } from '../../_services/account.service';
 import { AlertService } from '../../_services/alert.service';
+import { catchError, of } from 'rxjs';
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f(): { [key: string]: AbstractControl; } { return this.form.controls; }
 
-    async onSubmit(): Promise<void> {
+    public onSubmit(): void {
         this.submitted = true;
 
         // reset alerts on submit
@@ -43,14 +44,17 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        const user = await this.accountService.register(this.form.value).catch((error) => {
-            this.alertService.error(error);
-            this.loading = false;
+        const user = this.accountService.register(this.form.value).pipe(
+            catchError(error => {
+                this.alertService.error(error);
+                this.loading = false;
+                return of(error);
+            })
+        ).subscribe((user) => {
+            if (user) {
+                this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+                this.router.navigate(['../login'], { relativeTo: this.route });
+            }
         });
-
-        if (user) {
-            this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-            this.router.navigate(['../login'], { relativeTo: this.route });
-        }
     }
 }
