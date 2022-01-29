@@ -4,7 +4,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
@@ -25,6 +29,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { PurchaseModule } from './purchase/purchase.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SettingsComponent } from './settings/settings.component';
+import { StoreModule } from '@ngrx/store';
+import { familyFinanceReducer } from 'src/app/store/reducer';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -39,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlertComponent,
     FamilyComponent,
     MembersComponent,
-    SettingsComponent
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,27 +57,26 @@ export function HttpLoaderFactory(http: HttpClient) {
     MaterialModule,
     ReactiveFormsModule,
     GraphQLModule,
-    TranslateModule.forRoot(
-      {
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        }
-    }
-    ), // https://github.com/ngx-translate/core
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }), // https://github.com/ngx-translate/core
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+    StoreModule.forRoot({ app: familyFinanceReducer }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    FamilyService
+    FamilyService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
