@@ -11,7 +11,10 @@
     <h2>
         {{ 'purchases.new-purchase' | translate }}
     </h2>
-    <form [formGroup]="purchaseForm" (ngSubmit)="savePurchase()">
+    <form
+        [formGroup]="purchaseForm"
+        (ngSubmit)="savePurchase()"
+    >
         <mat-form-field appearance="fill">
             <mat-label>
                 {{ 'purchases.purchase-date' | translate }}
@@ -75,6 +78,7 @@
             <button
                 mat-button
                 (click)="cancel()"
+                type="button"
             >
                 {{ 'general.cancel' | translate }}
             </button>
@@ -82,7 +86,7 @@
                 class="save-btn"
                 mat-raised-button
                 color="primary"
-                (click)="savePurchase()"
+                type="submit"
             >
                 {{ 'general.save' | translate }}
             </button>

@@ -1,24 +1,23 @@
-import {NgModule} from '@angular/core';
-import {APOLLO_OPTIONS} from 'apollo-angular';
-import {ApolloClientOptions, DefaultOptions, InMemoryCache} from '@apollo/client/core';
-import {HttpLink} from 'apollo-angular/http';
-import { HttpHeaders } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloClientOptions, DefaultOptions, InMemoryCache } from '@apollo/client/core';
+import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
-  return {
-    link: httpLink.create({uri: environment.apiUrl}),
-    cache: new InMemoryCache(),
-  };
+    return {
+        link: httpLink.create({ uri: environment.apiUrl }),
+        cache: new InMemoryCache(),
+    };
 }
 
 @NgModule({
-  providers: [
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: createApollo,
-      deps: [HttpLink],
-    },
-  ],
+    providers: [
+        {
+            provide: APOLLO_OPTIONS,
+            useFactory: createApollo,
+            deps: [HttpLink],
+        },
+    ],
 })
-export class GraphQLModule {}
+export class GraphQLModule { }
