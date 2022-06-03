@@ -1,6 +1,6 @@
-import { CategoryMapping } from '../../_models/purchase';
+import { CategoryMapping } from '@model/purchase';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Purchase } from '../../_models/purchase';
+import { Purchase } from '@model/purchase';
 import { PurchaseService } from '../../_services/purchase.service';
 import { Router } from '@angular/router';
 import { FamilyService } from 'src/app/_services/family.service';
