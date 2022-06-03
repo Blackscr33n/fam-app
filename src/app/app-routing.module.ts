@@ -9,17 +9,17 @@ const accountModule = () => import('src/app/account/account.module').then(x => x
 const purchaseModule = () => import('src/app/purchase/purchase.module').then(x => x.PurchaseModule);
 
 const routes: Routes = [
-  { path: 'account', loadChildren: accountModule },
-  { path: 'todos', component: TodolistComponent, canActivate: [AuthGuard]},
-  { path: 'add-todo', component: AddTodoComponent, canActivate: [AuthGuard]},
-  { path: 'purchase', loadChildren: purchaseModule, canActivate: [AuthGuard]},
-  { path: 'family', component: FamilyComponent, canActivate: [AuthGuard]},
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
-  { path: '', redirectTo: '/purchase/dashboard', pathMatch: 'full' },
+    { path: 'account', loadChildren: accountModule },
+    { path: 'todos', component: TodolistComponent, canActivate: [AuthGuard] },
+    //{ path: 'add-todo', component: AddTodoComponent, canActivate: [AuthGuard]},
+    { path: 'purchase', loadChildren: purchaseModule, canActivate: [AuthGuard] },
+    { path: 'family', component: FamilyComponent, canActivate: [AuthGuard] },
+    { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+    { path: '', redirectTo: '/purchase/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

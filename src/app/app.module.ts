@@ -14,7 +14,6 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 import { AppComponent } from './app.component';
-import { TodolistComponent } from './todolist/todolist.component';
 import { AddTodoComponent } from './todolist/add-todo/add-todo.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AlertComponent } from './_components/alert/alert.component';
@@ -32,6 +31,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { StoreModule } from '@ngrx/store';
 import { familyFinanceReducer } from 'src/app/store/reducer';
 import { ApolloModule } from 'apollo-angular';
+import { TodolistModule } from './todolist/todolist.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -40,7 +40,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     declarations: [
         AppComponent,
-        TodolistComponent,
         AddTodoComponent,
         NavbarComponent,
         AlertComponent,
@@ -49,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         SettingsComponent,
     ],
     imports: [
+        TodolistModule,
         ApolloModule,
         BrowserModule,
         AppRoutingModule,
