@@ -27,19 +27,18 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
         private purchaseService: PurchaseService,
         private router: Router,
         private familyService: FamilyService,
-        private accountService: AccountService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private accountService: AccountService
     ) {
         this.purchase = new Purchase();
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.loading = true;
         this.familyService.loadFamily().subscribe(family => {
             this.family = family;
             this.loading = false;
         });
-
         this.purchaseForm = this.fb.group({
             purchaseDate: [this.purchase?.purchaseDate || ''],
             title: [this.purchase?.title || ''],
@@ -49,11 +48,11 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy(): void {
+    public ngOnDestroy(): void {
         this.subscriptions.forEach(sub => sub.unsubscribe());
     }
 
-    savePurchase(): void {
+    public savePurchase(): void {
         this.loading = true;
         this.purchase = new Purchase({
             id: null,
@@ -63,18 +62,18 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
             purchaser: this.purchaseForm.get('purchaser').value,
             title: this.purchaseForm.get('title').value,
         });
-        this.purchaseService.addPurchase(this.purchase).subscribe(purchase => {
+        this.purchaseService.addPurchase(this.purchase).subscribe(() => {
             this.purchase = new Purchase();
             this.loading = false;
             this.goToPurchaseList();
         });
     }
 
-    cancel(): void {
+    public cancel(): void {
         this.goToPurchaseList();
     }
 
-    goToPurchaseList(): void {
+    public goToPurchaseList(): void {
         this.router.navigate(['purchase']);
     }
 
