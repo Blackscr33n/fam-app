@@ -56,8 +56,6 @@ export class PurchaseSummaryComponent implements OnInit, OnDestroy {
                 this.purchaseService.getSummaryOfPurchasesByMonth(this.selectedDate)
                     .subscribe((summary) => {
                         this.summary = summary;
-                        console.log(summary);
-
                         if (this.summary.userExpenses) {
                             this.pieChartData = this.purchaseService.getPieChartData(this.summary.userExpenses);
                         }

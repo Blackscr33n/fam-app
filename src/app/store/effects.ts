@@ -31,7 +31,14 @@ export class AppEffects {
             });
      */
 
-    public login$ = createEffect(() => this.actions$.pipe(
+            public $login = createEffect(() => this.actions$.pipe(
+                ofType(StoreActions.login),
+                switchMap(([username, password]) => this.accountService.login(username, password)).pipe(
+                    map((user) => StoreActions.loginSuccess())
+                )
+            ));
+
+    /*public login$ = createEffect(() => this.actions$.pipe(
         ofType(StoreActions.login),
         switchMap((username, password) => this.accountService.login(username, password).pipe(
             tap(user => this.accountService.setUser(user)),
@@ -39,7 +46,7 @@ export class AppEffects {
             tap(() => this.router.navigate([this.route.snapshot.queryParams?.returnUrl || '/'])),
         ).pipe(() => StoreActions.loginSuccess)
         )
-    )
+    )*/
 }
 
 /**
