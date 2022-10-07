@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AccountService } from '../../_services/account.service';
 import { AlertService } from '../../_services/alert.service';
@@ -13,14 +13,14 @@ import { of } from 'rxjs';
     styleUrls: ['login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    form: FormGroup;
+    form: UntypedFormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
     error: string;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,

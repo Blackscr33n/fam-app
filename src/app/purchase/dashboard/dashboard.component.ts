@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Purchase } from 'src/app/_models';
@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
     public displayedColumns: string[] = ['date', 'title', 'category', 'purchaser', 'amount'];
     public purchases: Purchase[] = [];
     public selectedDate: moment.Moment = moment();
-    public yearPickerControl: FormControl = new FormControl();
+    public yearPickerControl: UntypedFormControl = new UntypedFormControl();
     public isLoading = true;
     public dateSubject: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
 

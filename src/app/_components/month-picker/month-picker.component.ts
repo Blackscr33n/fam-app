@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 
@@ -11,7 +11,7 @@ import * as moment from 'moment';
 export class MonthPickerComponent implements OnInit {
 
   @Output() selectedMonth: EventEmitter<number> = new EventEmitter<number>();
-  public monthControl = new FormControl(moment().month());
+  public monthControl = new UntypedFormControl(moment().month());
 
   public months: any[] = [];
 
