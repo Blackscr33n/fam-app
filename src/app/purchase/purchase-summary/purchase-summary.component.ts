@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 import { PurchaseService } from 'src/app/_services/purchase.service';
 import { LegendPosition } from '@swimlane/ngx-charts';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -11,8 +11,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 })
 export class PurchaseSummaryComponent implements OnInit, OnDestroy {
     @Input() public isCategory = false;
-    @Input() public selectedDate: moment.Moment = moment();
-    @Input() public dateSubject: BehaviorSubject<moment.Moment>;
+    @Input() public selectedDate: dayjs.Dayjs = dayjs();
+    @Input() public dateSubject: BehaviorSubject<dayjs.Dayjs>;
 
     public summary;
     public pieChartData;

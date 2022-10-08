@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../_models/todo';
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class TodoService {
   currentId = 1;
 
   todos: Todo[] = [
-    { id: 0, title: 'first todo', dueDate: moment().toDate(), isDone: false }
+    { id: 0, title: 'first todo', dueDate: dayjs().toDate(), isDone: false }
   ];
 
   addTodo(todo: Todo): void {
@@ -25,7 +25,7 @@ export class TodoService {
   }
 
   getNewTodo(): Todo {
-    return { id: this.currentId, title: '', dueDate: moment().toDate(), isDone: false };
+    return { id: this.currentId, title: '', dueDate: dayjs().toDate(), isDone: false };
   }
 
 }

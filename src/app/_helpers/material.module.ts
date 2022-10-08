@@ -9,7 +9,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -42,7 +41,6 @@ export const MY_FORMATS = {
     MatTableModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatMomentDateModule,
     MatAutocompleteModule,
     MatGridListModule,
     MatCardModule,

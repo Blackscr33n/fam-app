@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 import { User } from './user';
 
 export enum Category {
@@ -41,7 +41,7 @@ export class Purchase {
         this.amount = purchaseResponse?.amount || 0;
         this.category = purchaseResponse?.category || Category.None;
         this.title = purchaseResponse?.title || '';
-        this.purchaseDate = purchaseResponse?.purchaseDate || moment().toDate();
+        this.purchaseDate = purchaseResponse?.purchaseDate || dayjs().toDate();
         this.purchaser = purchaseResponse?.purchaser || null;
     }
 

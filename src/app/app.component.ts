@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class AppComponent {
     private accountService: AccountService,
     private translate: TranslateService
   ) {
-    moment.locale('de');
+    dayjs.locale('de');
     this.accountService.user.subscribe(x => this.user = x);
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('de');

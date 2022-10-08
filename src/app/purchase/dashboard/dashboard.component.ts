@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
-import * as moment from 'moment';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import dayjs from 'dayjs';
 import { Purchase } from 'src/app/_models';
 import { PurchaseService } from 'src/app/_services/purchase.service';
 
@@ -13,10 +13,10 @@ import { PurchaseService } from 'src/app/_services/purchase.service';
 export class DashboardComponent implements OnInit {
     public displayedColumns: string[] = ['date', 'title', 'category', 'purchaser', 'amount'];
     public purchases: Purchase[] = [];
-    public selectedDate: moment.Moment = moment();
+    public selectedDate: dayjs.Dayjs = dayjs();
     public yearPickerControl: UntypedFormControl = new UntypedFormControl();
     public isLoading = true;
-    public dateSubject: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
+    public dateSubject: BehaviorSubject<dayjs.Dayjs> = new BehaviorSubject(dayjs());
 
     private subscriptions: Subscription[] = [];
 
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
 
     ngAfterViewInit(): void {
         this.subscriptions.push(this.yearPickerControl.valueChanges.subscribe(value => {
-            this.selectedDate.year(moment(value).year());
+            this.selectedDate.year(dayjs(value).year());
             this.getPurchases();
             this.dateSubject.next(this.selectedDate);
         }

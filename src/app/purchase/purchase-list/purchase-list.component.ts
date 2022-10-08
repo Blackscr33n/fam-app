@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { PurchaseService } from '../../_services/purchase.service';
 import { Purchase } from '../../_models/purchase';
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 import { UntypedFormControl } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
@@ -13,10 +13,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 export class PurchaseListComponent implements AfterViewInit, OnDestroy, OnInit {
   public displayedColumns: string[] = ['date', 'title', 'category', 'purchaser', 'amount'];
   public purchases: Purchase[] = [];
-  public selectedDate: moment.Moment = moment();
+  public selectedDate: dayjs.Dayjs = dayjs();
   public yearPickerControl: UntypedFormControl = new UntypedFormControl();
   public isLoading = true;
-  public dateSubject: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
+  public dateSubject: BehaviorSubject<dayjs.Dayjs> = new BehaviorSubject(dayjs());
 
   private subscriptions: Subscription[] = [];
 
@@ -38,7 +38,7 @@ export class PurchaseListComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngAfterViewInit(): void {
     this.subscriptions.push(this.yearPickerControl.valueChanges.subscribe(value => {
-      this.selectedDate.year(moment(value).year());
+      this.selectedDate.year(dayjs(value).year());
       this.getPurchases();
       this.dateSubject.next(this.selectedDate);
     }

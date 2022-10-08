@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 import { Purchase, PurchaseResponse } from '../_models/purchase';
 import { Apollo, gql } from 'apollo-angular';
 import { HttpHeaders } from '@angular/common/http';
@@ -18,8 +18,8 @@ export class PurchaseService {
         addPurchase(
           title: "${purchase.title}"
           amount: ${purchase.amount}
-          purchaseDate: "${moment(purchase.purchaseDate).format('YYYY-MM-DD')}"
-          purchaseMonth: "${moment(purchase.purchaseDate).format('YYYY-MM')}"
+          purchaseDate: "${dayjs(purchase.purchaseDate).format('YYYY-MM-DD')}"
+          purchaseMonth: "${dayjs(purchase.purchaseDate).format('YYYY-MM')}"
           category: "${purchase.category}"
           purchaser: "${purchase.purchaser}"
         )
@@ -39,7 +39,7 @@ export class PurchaseService {
     }
 
     public getPurchasesByMonth(
-        selectedDate: moment.Moment
+        selectedDate: dayjs.Dayjs
     ): Observable<Purchase[]> {
         const dateString = selectedDate.format('YYYY-MM');
         const purchaseByMonthQuery = gql`
@@ -80,7 +80,7 @@ export class PurchaseService {
     }
 
     public getSummaryOfPurchasesByMonth(
-        selectedDate: moment.Moment
+        selectedDate: dayjs.Dayjs
     ): Observable<Purchase[]> {
         const dateString = selectedDate.format('YYYY-MM');
         const monthlyExpenses = gql`
@@ -134,7 +134,7 @@ export class PurchaseService {
     }
 
     public getSummaryOfCategoriesByMonth(
-        selectedDate: moment.Moment
+        selectedDate: dayjs.Dayjs
     ): Observable<Purchase[]> {
         const dateString = selectedDate.format('YYYY-MM');
         const monthlyCategoryExpenses = gql`

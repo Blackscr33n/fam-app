@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'app-month-picker',
@@ -11,7 +11,7 @@ import * as moment from 'moment';
 export class MonthPickerComponent implements OnInit {
 
   @Output() selectedMonth: EventEmitter<number> = new EventEmitter<number>();
-  public monthControl = new UntypedFormControl(moment().month());
+  public monthControl = new UntypedFormControl(dayjs().month());
 
   public months: any[] = [];
 
