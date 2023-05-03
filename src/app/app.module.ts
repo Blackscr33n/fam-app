@@ -1,40 +1,38 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AppRoutingModule } from "./app-routing.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import {
-    HttpClient,
-    HttpClientModule,
-    HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+	HttpClient,
+	HttpClientModule,
+	HTTP_INTERCEPTORS,
+} from "@angular/common/http";
 
-import { ErrorInterceptor } from './_helpers/error.interceptor';
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from "./_helpers/error.interceptor";
+import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 
-import { AppComponent } from './app.component';
-import { TodolistComponent } from './todolist/todolist.component';
-import { AddTodoComponent } from './todolist/add-todo/add-todo.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { AlertComponent } from './_components/alert/alert.component';
-import { FamilyComponent } from './family/family.component';
-import { MembersComponent } from './family/members/members.component';
-import { FamilyService } from './_services/family.service';
-import { GraphQLModule } from './graphql.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { MaterialModule } from './_helpers/material.module';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { PurchaseModule } from './purchase/purchase.module';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { SettingsComponent } from './settings/settings.component';
-import { StoreModule } from '@ngrx/store';
-import { familyFinanceReducer } from 'src/app/store/reducer';
-import { ApolloModule } from 'apollo-angular';
+import { AppComponent } from "./app.component";
+import { TodolistComponent } from "./todolist/todolist.component";
+import { AddTodoComponent } from "./todolist/add-todo/add-todo.component";
+import { NavbarComponent } from "./navbar/navbar.component";
+import { AlertComponent } from "./_components/alert/alert.component";
+import { FamilyComponent } from "./family/family.component";
+import { MembersComponent } from "./family/members/members.component";
+import { FamilyService } from "./_services/family.service";
+import { GraphQLModule } from "./graphql.module";
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { environment } from "../environments/environment";
+import { MaterialModule } from "./_helpers/material.module";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { PurchaseModule } from "./purchase/purchase.module";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { SettingsComponent } from "./settings/settings.component";
+import { ApolloModule } from "apollo-angular";
 
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http);
+	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
@@ -72,7 +70,6 @@ export function HttpLoaderFactory(http: HttpClient) {
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000',
         }),
-        StoreModule.forRoot({ app: familyFinanceReducer }),
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
@@ -81,4 +78,4 @@ export function HttpLoaderFactory(http: HttpClient) {
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
