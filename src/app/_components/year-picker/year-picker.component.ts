@@ -7,7 +7,7 @@ import {
   } from '@angular/core';
 import {
     ControlValueAccessor,
-    FormControl,
+    UntypedFormControl,
     NG_VALUE_ACCESSOR,
   } from '@angular/forms';
 import {
@@ -97,7 +97,7 @@ export const YEAR_MODE_FORMATS = {
 
     @ViewChild(MatDatepicker) _picker: MatDatepicker<moment.Moment>;
 
-    _inputCtrl: FormControl = new FormControl();
+    _inputCtrl: UntypedFormControl = new UntypedFormControl();
 
     // Function to call when the date changes.
     onChange = (year: Date) => { };

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Family, User } from '../_models';
 import { FamilyService } from '../_services/family.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
 import { AccountService } from '../_services/account.service';
 
@@ -11,9 +11,9 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./family.component.scss']
 })
 export class FamilyComponent implements OnInit {
-  familyForm: FormGroup;
+  familyForm: UntypedFormGroup;
   family: Family;
-  userControl: FormControl = new FormControl();
+  userControl: UntypedFormControl = new UntypedFormControl();
   options: User[] = [];
   filteredOptions: User[] = [];
   public isLoading: boolean = false;
@@ -21,7 +21,7 @@ export class FamilyComponent implements OnInit {
   constructor(
     private familyService: FamilyService,
     private accountService: AccountService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {

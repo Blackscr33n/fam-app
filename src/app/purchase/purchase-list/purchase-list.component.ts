@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '
 import { PurchaseService } from '../../_services/purchase.service';
 import { Purchase } from '../../_models/purchase';
 import * as moment from 'moment';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class PurchaseListComponent implements AfterViewInit, OnDestroy, OnInit {
   public displayedColumns: string[] = ['date', 'title', 'category', 'purchaser', 'amount'];
   public purchases: Purchase[] = [];
   public selectedDate: moment.Moment = moment();
-  public yearPickerControl: FormControl = new FormControl();
+  public yearPickerControl: UntypedFormControl = new UntypedFormControl();
   public isLoading = true;
   public dateSubject: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
 

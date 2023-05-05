@@ -19,13 +19,16 @@
         *ngIf="purchases.length != 0 && isLoading === false"
     >
 
+
+
+
         <!-- Date Column -->
         <ng-container matColumnDef="date">
             <th
                 mat-header-cell
                 *matHeaderCellDef
             >
-            {{ 'purchases.date' | translate | uppercase}}
+                {{ 'purchases.date' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -35,13 +38,16 @@
             </td>
         </ng-container>
 
+
+
+
         <!-- Title Column -->
         <ng-container matColumnDef="title">
             <th
                 mat-header-cell
                 *matHeaderCellDef
             >
-            {{ 'purchases.title' | translate | uppercase}}
+                {{ 'purchases.title' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -50,6 +56,9 @@
                 {{element.title}}
             </td>
         </ng-container>
+
+
+
 
 
         <!-- Title Column -->
@@ -69,6 +78,9 @@
         </ng-container>
 
 
+
+
+
         <!-- Purchaser Column -->
         <ng-container matColumnDef="purchaser">
             <th
@@ -84,6 +96,9 @@
                 {{element.purchaser.firstname }}
             </td>
         </ng-container>
+
+
+
 
 
         <!-- Amount Column -->
@@ -104,6 +119,9 @@
         </ng-container>
 
 
+
+
+
         <tbody>
             <tr
                 mat-header-row
@@ -115,6 +133,9 @@
             ></tr>
         </tbody>
     </table>
+
+
+
 
 
     <div *ngIf="purchases.length === 0 && isLoading === false">
@@ -132,11 +153,4 @@
             {{ 'purchases.add-purchase' | translate}}
         </button>
     </div>
-    <mat-divider></mat-divider>
-    <app-purchase-summary
-        *ngIf="purchases.length != 0"
-        [selectedDate]="selectedDate"
-        [isCategory]="true"
-        [dateSubject]="dateSubject"
-    ></app-purchase-summary>
 </div>

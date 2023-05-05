@@ -1,17 +1,23 @@
-<div *ngIf="summary" class="summary-container">
-    
+<div
+    *ngIf="summary"
+    class="summary-container"
+>
+
+
     <p *ngFor="let owe of summary.owes">
         {{owe.debtor.firstname + ' ' + owe.debtor.lastname}} 
         {{ 'owes' | translate }} {{owe.creditor.firstname + ' ' + owe.creditor.lastname}}
         &nbsp;{{owe.amount | currency: 'EUR'}}
     </p>
 
+
     <div *ngFor="let expense of summary.userExpenses">
         {{expense.purchaser.firstname + ' ' +expense.purchaser.lastname}}: 
         &nbsp;{{expense.amount | currency: 'EUR'}}
     </div>
 
-    <ngx-charts-pie-chart *ngIf="pieChartData"
+
+    <!-- ngx-charts-pie-chart *ngIf="pieChartData"
     [view]="view"
     [scheme]="colorScheme"
     [results]="pieChartData"
@@ -24,6 +30,7 @@
     (activate)="onActivate($event)"
     (deactivate)="onDeactivate($event)"
     >
-    </ngx-charts-pie-chart>
+    </ngx-charts-pie-chart -->
+
 
 </div>

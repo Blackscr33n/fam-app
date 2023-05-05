@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { FamilyService } from 'src/app/_services/family.service';
 import { Family } from 'src/app/_models';
 import { Subscription } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { AccountService } from 'src/app/_services/account.service';
 export class AddPurchaseComponent implements OnInit, OnDestroy {
 
     public purchase: Purchase;
-    public purchaseForm: FormGroup;
+    public purchaseForm: UntypedFormGroup;
     public family: Family;
     public categories: any = Object.values(CategoryMapping);
     public loading = true;
@@ -27,7 +27,7 @@ export class AddPurchaseComponent implements OnInit, OnDestroy {
         private purchaseService: PurchaseService,
         private router: Router,
         private familyService: FamilyService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private accountService: AccountService
     ) {
         this.purchase = new Purchase();

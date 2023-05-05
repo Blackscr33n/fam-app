@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -9,14 +9,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SettingsComponent implements OnInit{
 
-  public settingsForm: FormGroup;
+  public settingsForm: UntypedFormGroup;
   public languages = [];
 
   constructor(private translate: TranslateService) { }
 
   ngOnInit(): void {
-    this.settingsForm = new FormGroup({
-      language: new FormControl(localStorage.getItem('lang') || 'en')
+    this.settingsForm = new UntypedFormGroup({
+      language: new UntypedFormControl(localStorage.getItem('lang') || 'en')
     });
 
     this.loadLanguageLabels();
