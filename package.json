@@ -6,6 +6,8 @@
     "start": "node server.js",
     "start:dev": "ng serve",
     "build": "ng build --configuration production",
+    "build:stats": "ng build --stats-json",
+    "analyze": "webpack-bundle-analyzer dist/fam-app/stats.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
