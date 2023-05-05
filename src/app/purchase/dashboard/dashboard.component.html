@@ -2,6 +2,9 @@
 <div class="container">
 
 
+
+
+
     <h1>{{ 'purchases.dashboard' | translate }}</h1>
     <div
         *ngIf="isLoading"
@@ -16,13 +19,16 @@
     >
 
 
+
+
+
         <!-- Date Column -->
         <ng-container matColumnDef="date">
             <th
                 mat-header-cell
                 *matHeaderCellDef
             >
-            {{ 'purchases.date' | translate | uppercase}}
+                {{ 'purchases.date' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -37,7 +43,7 @@
                 mat-header-cell
                 *matHeaderCellDef
             >
-            {{ 'purchases.title' | translate | uppercase}}
+                {{ 'purchases.title' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -52,7 +58,7 @@
                 mat-header-cell
                 *matHeaderCellDef
             >
-            {{ 'purchases.category' | translate | uppercase}}
+                {{ 'purchases.category' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -67,7 +73,7 @@
                 mat-header-cell
                 *matHeaderCellDef
             >
-            {{ 'purchases.buyer' | translate | uppercase}}
+                {{ 'purchases.buyer' | translate | uppercase}}
             </th>
             <td
                 mat-cell
@@ -93,6 +99,9 @@
             </td>
         </ng-container>
 
+
+
+
         <tbody>
             <tr
                 mat-header-row
@@ -105,7 +114,9 @@
         </tbody>
     </table>
     <div *ngIf="purchases.length === 0 && isLoading === false">
-        <span>{{ 'purchases.no-purchases-available' | translate }}</span>
+        <span>
+            {{ 'purchases.no-purchases-available' | translate }}
+        </span>
     </div>
     <div class="button-container">
         <button
@@ -117,10 +128,4 @@
             {{ 'purchases.add-purchase' | translate }}
         </button>
     </div>
-    <mat-divider></mat-divider>
-    <app-purchase-summary
-        *ngIf="purchases.length != 0"
-        [selectedDate]="selectedDate"
-        [dateSubject]="dateSubject"
-    ></app-purchase-summary>
 </div>
