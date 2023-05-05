@@ -28,8 +28,7 @@ import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { PurchaseModule } from "./purchase/purchase.module";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ApolloModule } from "apollo-angular";
-import { SettingsComponent } from './settings/settings.component';
-import { TodolistModule } from './todolist/todolist.module';
+import { SettingsComponent } from "./settings/settings.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -46,7 +45,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         SettingsComponent,
     ],
     imports: [
-        TodolistModule,
         ApolloModule,
         BrowserModule,
         AppRoutingModule,
