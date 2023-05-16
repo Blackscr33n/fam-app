@@ -9,14 +9,14 @@
             class="login-form"
         >
             <mat-form-field appearance="fill">
-                <mat-label>Username</mat-label>
+                <mat-label>Email</mat-label>
                 <input
                     matInput
-                    type="text"
+                    type="email"
                     formControlName="username"
                     placeholder="pat@example.com"
                 >
-                <mat-error *ngIf="f.username.errors">Username is required</mat-error>
+                <mat-error *ngIf="f.username.errors">Email is required</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
