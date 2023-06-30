@@ -28,14 +28,14 @@
                 <mat-error *ngIf="f.lastname.errors?.required">Lastname is required</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>Username</mat-label>
+                <mat-label>Email</mat-label>
                 <input
                     matInput
-                    type="text"
+                    type="email"
                     formControlName="username"
                     placeholder="max.mustermann@mail.com"
                 >
-                <mat-error *ngIf="f.username.errors?.required">Username is required</mat-error>
+                <mat-error *ngIf="f.username.errors?.required">Email is required</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
