@@ -51,4 +51,10 @@ export class DashboardComponent implements OnInit {
         });
     }
 
+    handleSelectedMonth(month: any): void {
+        this.selectedDate.month(month);
+        this.dateSubject.next(this.selectedDate);
+        this.getPurchases();
+    }
+
 }

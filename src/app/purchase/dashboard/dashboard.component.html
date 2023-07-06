@@ -3,10 +3,15 @@
 
 
 
-
-
-
     <h1>{{ 'purchases.dashboard' | translate }}</h1>
+
+
+    <app-year-picker
+        [formControl]="yearPickerControl"
+        [touchUi]="true"
+        label="{{ 'purchases.year' | translate }}"
+    ></app-year-picker>
+    <app-month-picker (selectedMonth)="handleSelectedMonth($event)"></app-month-picker>
     <div
         *ngIf="isLoading"
         class="spinner-container"
@@ -18,9 +23,6 @@
         [dataSource]="purchases"
         *ngIf="purchases.length != 0 && isLoading === false"
     >
-
-
-
 
 
 
@@ -100,6 +102,8 @@
                 {{element.amount | currency : 'EUR'}}
             </td>
         </ng-container>
+
+
 
 
 
