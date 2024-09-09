@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://fam-app-backend.herokuapp.com/graphql'
+  apiUrl: 'https://api.fam-app.com/graphql'
 };
